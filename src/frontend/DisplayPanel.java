@@ -107,17 +107,17 @@ public class DisplayPanel extends JPanel {
     }
 
     public List<CellPanel> getNeighbors(CellPanel cell) {
-        List<CellPanel> neighbors = new ArrayList<>();
+        var neighbors = new ArrayList<CellPanel>();
 
-        int[] dr = {-1, 0, 1, 0};
-        int[] dc = {0, 1, 0, -1};
+        var dr = new int[]{-1, 0, 1, 0};
+        var dc = new int[]{0, 1, 0, -1};
 
         for (int i = 0; i < 4; i++) {
-            int newRow = cell.getRow() + dr[i];
-            int newColumn = cell.getColumn() + dc[i];
+            var newRow = cell.getRow() + dr[i];
+            var newColumn = cell.getColumn() + dc[i];
 
             if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns) {
-                CellPanel neighbor = cellPanels[newRow][newColumn];
+                var neighbor = cellPanels[newRow][newColumn];
                 if (areAdjacent(cell, neighbor)) {
                     neighbors.add(neighbor);
                 }
@@ -129,7 +129,7 @@ public class DisplayPanel extends JPanel {
     //Check uf there is a path between start and end panel
     private boolean isPath() {
         start = cellPanels[0][columns - 1];
-        Component component = getComponent(start.getRow(), start.getColumn());
+        var component = getComponent(start.getRow(), start.getColumn());
         end = cellPanels[rows - 1][0];
 
         //Check if cell is in the component of the start cell
@@ -142,14 +142,14 @@ public class DisplayPanel extends JPanel {
         visited[current.getColumn()][current.getColumn()] = true;
         component.addCell(current);
 
-        int[] dr = {-1, 0, 1, 0};
-        int[] dc = {0, 1, 0, -1};
+        var dr = new int[]{-1, 0, 1, 0};
+        var dc = new int[]{0, 1, 0, -1};
 
         //iterate over each direction
-        for (int i = 0; i < 4; i++) {
+        for (var i = 0; i < 4; i++) {
             //Compute the row and column indices of the new cell by adding the direction to the current cells indices
-            int newRow = current.getRow() + dr[i];
-            int newColumn = current.getColumn() + dc[i];
+            var newRow = current.getRow() + dr[i];
+            var newColumn = current.getColumn() + dc[i];
 
             //Check if the new cell is within grid boundaries and not visited yet
             if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns && !visited[newRow][newColumn] && cellPanels[newRow][newColumn].getBackground() == current.getBackground()) {
@@ -164,12 +164,12 @@ public class DisplayPanel extends JPanel {
 
     public boolean isFinalConfiguration() {
         //iterate over all Cell panels
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                CellPanel cell = cellPanels[i][j];
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < columns; j++) {
+                var cell = cellPanels[i][j];
 
                 //Check if the cells Color is the same as any of its neighbors
-                for (CellPanel neighbor : getNeighbors(cell)) {
+                for (var neighbor : getNeighbors(cell)) {
                     if (cell.getBackground() != neighbor.getBackground()) {
                         //If a cell has a neighbor with a different color, the gameboard has not reached a final configuration
                         return false;
@@ -186,8 +186,8 @@ public class DisplayPanel extends JPanel {
 
     public void checkGameOver() {
         //TODO Add and replace with Logic here to check if game is over and who won
-        boolean isGameOver = false;
-        String winner = "game.Player"; //TODO Replace this with actual logic
+        var isGameOver = false;
+        var winner = "game.Player"; //TODO Replace this with actual logic
     }
 
     public CellPanel[][] getCellPanels() {
@@ -218,8 +218,8 @@ public class DisplayPanel extends JPanel {
 
     private void cellPanelsCreation(int columns, int rows) {
         cellPanels = new CellPanel[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < columns; j++) {
                 var panel = new CellPanel(Color.CYAN, i, j, false);
                 cellPanels[i][j] = panel;
                 //register actionListener

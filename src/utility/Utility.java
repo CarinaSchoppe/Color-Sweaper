@@ -17,7 +17,7 @@ public class Utility {
     private static DisplayPanel displayPanel;
 
     public static java.awt.Color generateRandomColor() {
-        Random random = new Random();
+        var random = new Random();
         return selectedColors[random.nextInt(selectedColors.length)];
     }
 
@@ -63,7 +63,7 @@ public class Utility {
 
     public static Color[] getRandomColors(int colorCount) {
         var randomColors = new HashSet<Color>();
-        Random random = new Random();
+        var random = new Random();
         while (randomColors.size() < colorCount) {
             randomColors.add(COLORS[random.nextInt(COLORS.length)]);
         }

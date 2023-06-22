@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.Random;
 
 public class GameWindow {
@@ -25,7 +24,7 @@ public class GameWindow {
     private static JLabel gameStatus;
 
     public static void createAndShowGUI() {
-        JFrame frame = new JFrame("Start");
+        var frame = new JFrame("Start");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Set size of the Frame
@@ -38,13 +37,13 @@ public class GameWindow {
         frame.setLocationRelativeTo(null);
 
         //Create Menu Panel
-        JPanel menuPanel = new JPanel();
+        var menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(200, 600));
         menuPanel.setBackground(Color.CYAN);
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 
         //Add Help Button to menuPanel
-        JButton helpButton = new JButton("Help");
+        var helpButton = new JButton("Help");
         helpButton.addActionListener(e -> JOptionPane.showMessageDialog(frame, "THIS IS HOW THE GAME IS PLAYED", "Instructions", JOptionPane.INFORMATION_MESSAGE));
         menuPanel.add(helpButton);
 
@@ -60,12 +59,12 @@ public class GameWindow {
         menuPanel.add(playPauseButton);
 
         //Add game.Player select dropdown to menuPanel
-        String[] players = {"S1", "S2"};
+        var players = new String[]{"S1", "S2"};
         playerSelect = new JComboBox<>(players);
         menuPanel.add(playerSelect);
 
         //Add color Spinner to MenuPanel
-        SpinnerNumberModel colorModel = new SpinnerNumberModel(5, 4, 9, 1);
+        var colorModel = new SpinnerNumberModel(5, 4, 9, 1);
         colorSpinner = new JSpinner(colorModel);
         menuPanel.add(colorSpinner);
         colorSpinner.addChangeListener(e -> {
@@ -80,21 +79,21 @@ public class GameWindow {
         updateSelectedColors((Integer) colorModel.getValue());
 
         //Add row Spinner to MenuPanel
-        SpinnerNumberModel rowModel = new SpinnerNumberModel(6, 3, 10, 1);
+        var rowModel = new SpinnerNumberModel(6, 3, 10, 1);
         rowSpinner = new JSpinner(rowModel);
         menuPanel.add(rowSpinner);
 
         rowSpinner.addChangeListener(e -> Utility.getDisplayPanel().setRows((Integer) rowSpinner.getValue()));
 
         //Add column Spinner to MenuPanel
-        SpinnerNumberModel columnModel = new SpinnerNumberModel(6, 3, 10, 1);
+        var columnModel = new SpinnerNumberModel(6, 3, 10, 1);
         columnSpinner = new JSpinner(columnModel);
         menuPanel.add(columnSpinner);
 
         columnSpinner.addChangeListener(e -> Utility.getDisplayPanel().setColumns((Integer) columnSpinner.getValue()));
 
         //Add strategy select Dropdown to menuPanel
-        String[] strategies = {"Strategy01", "Strategy02", "Strategy03"};
+        var strategies = new String[]{"Strategy01", "Strategy02", "Strategy03"};
         strategySelect = new JComboBox<>(strategies);
         menuPanel.add(strategySelect);
 

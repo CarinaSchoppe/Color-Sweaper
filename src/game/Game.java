@@ -1,6 +1,5 @@
 package game;
 
-import frontend.CellPanel;
 import frontend.DisplayPanel;
 import utility.Component;
 
@@ -10,12 +9,9 @@ public class Game {
     private DisplayPanel displayPanel;
     private int unchangedMovesCount;
 
-    
-    private static Game game;
-    
-    
 
- 
+    private static Game game;
+
 
     private static boolean gameRunning;
     private static boolean gamePaused;
@@ -34,14 +30,20 @@ public class Game {
         return player == player1 ? player2 : player1;
     }
 
+    public static Game getGame() {
+        if (game == null)
+            game = new Game(null, null, null);
+        return game;
+    }
+
     public Component updateComponent(Player player) {
-        int prevComponentSize = player.getComponent().getCells().size();
-        Component component = player.getComponent();
+        var prevComponentSize = player.getComponent().getCells().size();
+        var component = player.getComponent();
 
         //TODO Correct?
-        for (CellPanel cell : component.getCells()) {
+        for (var cell : component.getCells()) {
             cell.setColor(player.getColor());
-            for (CellPanel neighbor : displayPanel.getNeighbors(cell)) {
+            for (var neighbor : displayPanel.getNeighbors(cell)) {
                 if (neighbor.getColor() == player.getColor() && !component.getCells().contains(neighbor)) {
                     component.getCells().add(neighbor);
                 }
@@ -57,17 +59,6 @@ public class Game {
         return component;
     }
 
-    public boolean isGameOver() {
-        //Check if the board is in final configuration
-        if (displayPanel.isFinalConfiguration()) {
-            return true;
-        }
-        if (unchangedMovesCount >= 4) {
-            return true;
-        }
-        return false;
-    }
-
     public Player getWinner() {
         if (player1.getComponent().getCells().size() > player2.getComponent().getCells().size()) {
             return player1;
@@ -78,15 +69,18 @@ public class Game {
         }
     }
 
+    public boolean isGameOver() {
+        //Check if the board is in final configuration
+        if (displayPanel.isFinalConfiguration()) {
+            return true;
+        }
+        return unchangedMovesCount >= 4;
+    }
 
-    public void startGame(){
+    public void startGame() {
 //TODO: Implement
     }
 
-    public void pauseGame(){
-//TODO: Implement
-
-    }
     public Player getPlayer1() {
         return player1;
     }
@@ -127,24 +121,24 @@ public class Game {
     public static boolean isGamePaused() {
         return gamePaused;
     }
+
     public static boolean isGameRunning() {
         return gameRunning;
     }
 
-    public static Game getGame() {
-        if(game == null)
-            game = new Game(null,null,null);
-        return game;
+    public void pauseGame() {
+//TODO: Implement
+
     }
 
     public static void setGameRunning(boolean gameRunning) {
         Game.gameRunning = gameRunning;
     }
+
     public static void setGamePaused(boolean gamePaused) {
         Game.gamePaused = gamePaused;
     }
-    
-   
+
 
     public void setUnchangedMovesCount(int unchangedMovesCount) {
         this.unchangedMovesCount = unchangedMovesCount;

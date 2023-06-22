@@ -26,7 +26,7 @@ public class Component {
     private boolean isContiguous() {
         if (cells.isEmpty()) return true;
 
-        Set<CellPanel> visited = new HashSet<>();
+        var visited = new HashSet<CellPanel>();
 
         dfs(cells.get(0), visited);
 
@@ -36,7 +36,7 @@ public class Component {
     private void dfs(CellPanel current, Set<CellPanel> visited) {
         visited.add(current);
 
-        for (CellPanel cell : cells) {
+        for (var cell : cells) {
             if (!visited.contains(cell) && Utility.getDisplayPanel().areAdjacent(current, cell)) {
                 dfs(cell, visited);
             }

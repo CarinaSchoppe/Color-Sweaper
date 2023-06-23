@@ -11,6 +11,7 @@ public class Game {
     private Player player2;
     private DisplayPanel displayPanel;
     private int unchangedMovesCount;
+    private boolean isInitialized;
 
     private static Game game;
 
@@ -30,7 +31,7 @@ public class Game {
     public Player getOpponent(Player player) {
         return player == player1 ? player2 : player1;
     }
-    private boolean isInitialized;
+
 
     public static Game getGame() {
         if (game == null) {

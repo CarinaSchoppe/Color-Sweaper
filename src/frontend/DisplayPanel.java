@@ -1,12 +1,12 @@
 package frontend;
 
+import game.Game;
 import listeners.SelectColorAction;
 import utility.Component;
+import utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +44,10 @@ public class DisplayPanel extends JPanel {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
                 boolean isStartingField = (i == 0 && j == 0) || (i == rows - 1 && j == columns - 1);
-
                 Color cellColor;
+                //color the fields in different colors
                 do {
-                    cellColor = GameWindow.randomColor();
+                    cellColor = Utility.randomColor();
                 } while ((i > 0 && cellColor.equals(cellPanels[i - 1][j].getBackground()))
                         || (j > 0 && cellColor.equals(cellPanels[i][j - 1].getBackground())));
 
@@ -56,16 +56,6 @@ public class DisplayPanel extends JPanel {
                 cellPanels[i][j] = cellPanel;
                 cellPanels[i][j].setBackground(cellColor);
                 cellPanels[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                final int finalI = i;
-                final int finalJ = j;
-                cellPanels[i][j].addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        colorBoard(cellPanels[finalI][finalJ].getBackground());
-                    }
-                });
-
                 add(cellPanels[i][j]);
             }
         }
@@ -74,7 +64,7 @@ public class DisplayPanel extends JPanel {
         while (cellPanels[0][columns - 1].getBackground().equals(cellPanels[rows - 1][0].getBackground())) {
             Color newColor;
             do {
-                newColor = GameWindow.randomColor();
+                newColor = Utility.randomColor();
             } while (newColor.equals(cellPanels[0][columns - 1].getBackground()));
 
             cellPanels[rows - 1][0].setBackground(newColor);
@@ -85,10 +75,9 @@ public class DisplayPanel extends JPanel {
         repaint();
     }
 
-    private Component getComponent(int row, int column) {
+    public Component getComponent(int row, int column) {
         Component component = new Component();
-        boolean[][] visited = new boolean[rows][columns];
-        dfs(cellPanels[row][column], component, visited);
+        component.addCell(cellPanels[row][column]);
         return component;
     }
 
@@ -137,28 +126,8 @@ public class DisplayPanel extends JPanel {
 
     }
 
-    //Depth-First-Search
-    private boolean dfs(CellPanel current, Component component, boolean[][] visited) {
-        visited[current.getColumn()][current.getColumn()] = true;
-        component.addCell(current);
-
-        var dr = new int[]{-1, 0, 1, 0};
-        var dc = new int[]{0, 1, 0, -1};
-
-        //iterate over each direction
-        for (var i = 0; i < 4; i++) {
-            //Compute the row and column indices of the new cell by adding the direction to the current cells indices
-            var newRow = current.getRow() + dr[i];
-            var newColumn = current.getColumn() + dc[i];
-
-            //Check if the new cell is within grid boundaries and not visited yet
-            if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns && !visited[newRow][newColumn] && cellPanels[newRow][newColumn].getBackground() == current.getBackground()) {
-                //If it returns true, we have found a path to the end
-                if (dfs(cellPanels[newRow][newColumn], component, visited)) {
-                    return true;
-                }
-            }
-        }
+    //TODO
+    private boolean graphSearch(CellPanel current, Component component, boolean[][] visited) {
         return false;
     }
 
@@ -167,13 +136,9 @@ public class DisplayPanel extends JPanel {
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 var cell = cellPanels[i][j];
-
-                //Check if the cells Color is the same as any of its neighbors
-                for (var neighbor : getNeighbors(cell)) {
-                    if (cell.getBackground() != neighbor.getBackground()) {
-                        //If a cell has a neighbor with a different color, the gameboard has not reached a final configuration
-                        return false;
-                    }
+                //check if the cell is eighter the color of player1 or player2 if not return false
+                if (cell.getBackground() != Game.getGame().getPlayer1().getColor() && cell.getBackground() != Game.getGame().getPlayer2().getColor()) {
+                    return false;
                 }
             }
         }
@@ -184,11 +149,6 @@ public class DisplayPanel extends JPanel {
         //Logic to recolor board
     }
 
-    public void checkGameOver() {
-        //TODO Add and replace with Logic here to check if game is over and who won
-        var isGameOver = false;
-        var winner = "game.Player"; //TODO Replace this with actual logic
-    }
 
     public CellPanel[][] getCellPanels() {
         return cellPanels;
@@ -244,4 +204,6 @@ public class DisplayPanel extends JPanel {
     public void setEnd(CellPanel end) {
         this.end = end;
     }
+
+
 }

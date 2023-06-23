@@ -57,6 +57,10 @@ public class Utility {
         return displayPanel;
     }
 
+    public static java.awt.Color randomColor() {
+        Random random = new Random();
+        return Utility.getSelectedColors()[random.nextInt(Utility.getSelectedColors().length)];
+    }
     public static void setDisplayPanel(DisplayPanel displayPanel) {
         Utility.displayPanel = displayPanel;
     }

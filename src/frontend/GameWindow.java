@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 
 public class GameWindow {
     private static JButton startStopButton;
@@ -143,10 +142,6 @@ public class GameWindow {
         Utility.setSelectedColors(randomColors);
     }
 
-    public static java.awt.Color randomColor() {
-        Random random = new Random();
-        return Utility.getSelectedColors()[random.nextInt(Utility.getSelectedColors().length)];
-    }
 
     public static JButton getStartStopButton() {
         return startStopButton;

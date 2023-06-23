@@ -47,4 +47,9 @@ public class CellPanel extends JPanel {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public boolean isAdjacent(CellPanel panel) {
+        return (Math.abs(this.row - panel.row) == 1 && this.column == panel.column)
+                || (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
+    }
 }

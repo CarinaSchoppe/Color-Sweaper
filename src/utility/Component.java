@@ -3,9 +3,7 @@ package utility;
 import frontend.CellPanel;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Component {
     private final List<CellPanel> cells;
@@ -23,27 +21,18 @@ public class Component {
     }
 
     //Checks whether all cells are connected directly or indirectly
-    private boolean isContiguous() {
-        if (cells.isEmpty()) return true;
-
-        var visited = new HashSet<CellPanel>();
-
-        dfs(cells.get(0), visited);
-
-        return visited.size() == cells.size();
-    }
-
-    private void dfs(CellPanel current, Set<CellPanel> visited) {
-        visited.add(current);
-
-        for (var cell : cells) {
-            if (!visited.contains(cell) && Utility.getDisplayPanel().areAdjacent(current, cell)) {
-                dfs(cell, visited);
-            }
-        }
-    }
 
     public List<CellPanel> getCells() {
         return cells;
+    }
+
+    public boolean isAdjacent(CellPanel panel) {
+        //go through all of my components and check if it is adjacent to any of them
+        for (var cell : cells) {
+            if (cell.isAdjacent(panel)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

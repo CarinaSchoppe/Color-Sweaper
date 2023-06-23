@@ -12,22 +12,23 @@ public class StartStopAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if (Game.isGameRunning()) {
+        if (!Game.getGame().isGamePaused()) return;
+
+        if (Game.getGame().isGameRunning()) {
             GameWindow.getStartStopButton().setText("Start");
             GameWindow.getGameStatus().setText(" ");
             Utility.getTimer().stop();
             Utility.setTimerSeconds(0);
             GameWindow.getTimerLabel().setText("00:00");
             Utility.getDisplayPanel().clearBoard();
+            Game.getGame().stopGame();
         } else {
             GameWindow.getStartStopButton().setText("Stop");
             GameWindow.getGameStatus().setText(" ");
             Utility.getColorPanel().refreshColors();
             Utility.getDisplayPanel().generateRandomBoard();
-
         }
-        Game.setGameRunning(!Game.isGameRunning());
+        Game.getGame().setGameRunning(!Game.getGame().isGameRunning());
     }
     
 }

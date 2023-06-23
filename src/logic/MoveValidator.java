@@ -1,12 +1,10 @@
 package logic;
 
-import frontend.ColorPanel;
-import game.Game;
+import frontend.CellPanel;
 
-public class MoveValidator {
+public interface MoveValidator {
 
-    public static void moveValidator(ColorPanel panel){
-        var currentPlayer = Game.getCurrentPlayer();
-    }
+
+    boolean validateMove(CellPanel panel);
 
 }

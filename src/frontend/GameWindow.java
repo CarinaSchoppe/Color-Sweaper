@@ -1,14 +1,14 @@
 package frontend;
 
+import game.AIPlayer;
 import game.Game;
 import listeners.PlayPauseAction;
 import listeners.StartStopAction;
+import logic.Strategies;
 import utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class GameWindow {
     private static JButton startStopButton;
@@ -20,7 +20,7 @@ public class GameWindow {
     private static JComboBox<String> strategySelect;
     private static JLabel timerLabel;
 
-
+    private static String strategy;
     private static JLabel gameStatus;
 
     public static void createAndShowGUI() {
@@ -113,6 +113,15 @@ public class GameWindow {
         //Add strategy select Dropdown to menuPanel
         var strategies = new String[]{"Strategy01", "Strategy02", "Strategy03"};
         strategySelect = new JComboBox<>(strategies);
+        strategy = (String) strategySelect.getSelectedItem();
+        strategySelect.addActionListener(e -> {
+            if (Game.getGame().isGameRunning()) {
+                strategySelect.setSelectedItem(strategy);
+                return;
+            }
+            strategy = (String) strategySelect.getSelectedItem();
+            ((AIPlayer) Game.getGame().getPlayer2()).setStrategy(Strategies.getMatchingName(strategy));
+        });
         menuPanel.add(strategySelect);
 
         //Add Timer Label to menuPanel
@@ -126,19 +135,6 @@ public class GameWindow {
 
 
         gameStatus = new JLabel(" ");
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (Game.getGame().isGameRunning())
-                    return;
-                int key = e.getKeyCode() - KeyEvent.VK_1 + 1;
-                if (key >= 1 && key <= Utility.getColorPanel().getColorCount()) {
-                    Color selectedColor = Utility.getColorPanel().getColorPanels()[key - 1].getBackground();
-                    Utility.getDisplayPanel().colorBoard(selectedColor);
-                }
-            }
-        });
-
         //Add Panels to Frame
         frame.getContentPane().add(BorderLayout.EAST, menuPanel);
         frame.getContentPane().add(BorderLayout.CENTER, Utility.getDisplayPanel());

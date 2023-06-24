@@ -1,6 +1,7 @@
 package frontend;
 
 import game.Game;
+import game.Player;
 import listeners.SelectColorAction;
 import utility.Component;
 import utility.Utility;
@@ -8,7 +9,9 @@ import utility.Utility;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DisplayPanel extends JPanel {
     private CellPanel[][] cellPanels;
@@ -78,8 +81,8 @@ public class DisplayPanel extends JPanel {
         return new Color[]{cellPanels[columns - 1][0].getBackground(), cellPanels[0][rows - 1].getBackground()};
     }
 
-    public Component getComponent(int row, int column) {
-        Component component = new Component();
+    public Component createComponent(int row, int column) {
+        var component = new Component();
         component.addCell(cellPanels[row][column]);
         return component;
     }
@@ -93,10 +96,6 @@ public class DisplayPanel extends JPanel {
         }
     }
 
-    //Check if cells are neighbors
-    public boolean areAdjacent(CellPanel c1, CellPanel c2) {
-        return Math.abs(c1.getColumn() - c2.getColumn()) + Math.abs(c1.getColumn() - c2.getColumn()) == 1;
-    }
 
     public List<CellPanel> getNeighbors(CellPanel cell) {
         var neighbors = new ArrayList<CellPanel>();
@@ -112,25 +111,12 @@ public class DisplayPanel extends JPanel {
             neighbors.add(cellPanels[cell.getRow()][left]);
         if (right < columns)
             neighbors.add(cellPanels[cell.getRow()][right]);
-        
+
         return neighbors;
     }
 
     //Check uf there is a path between start and end panel
-    private boolean isPath() {
-        start = cellPanels[0][columns - 1];
-        var component = getComponent(start.getRow(), start.getColumn());
-        end = cellPanels[rows - 1][0];
 
-        //Check if cell is in the component of the start cell
-        return component.getCells().contains(end);
-
-    }
-
-    //TODO
-    private boolean graphSearch(CellPanel current, Component component, boolean[][] visited) {
-        return false;
-    }
 
     public boolean isFinalConfiguration() {
         //iterate over all Cell panels
@@ -144,10 +130,6 @@ public class DisplayPanel extends JPanel {
             }
         }
         return true;
-    }
-
-    void colorBoard(Color color) {
-        //Logic to recolor board
     }
 
 
@@ -207,4 +189,13 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    //check if there is any possible move for the player
+    public boolean noPossibleMove(Player player) {
+        var adjecentCells = new HashSet<CellPanel>();
+        for (var cell : player.getComponent().getCells()) {
+            var neighbors = getNeighbors(cell).stream().filter(cellPanel -> cellPanel.getBackground() != player.getColor() && cellPanel.getBackground() != Game.getGame().getOpponent(player).getColor()).collect(Collectors.toSet());
+            adjecentCells.addAll(neighbors);
+        }
+        return adjecentCells.size() == 0;
+    }
 }

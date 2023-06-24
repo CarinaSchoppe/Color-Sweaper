@@ -16,9 +16,6 @@ public class Component {
         cells.add(cell);
     }
 
-    private int size() {
-        return cells.size();
-    }
 
     //Checks whether all cells are connected directly or indirectly
 
@@ -44,12 +41,9 @@ public class Component {
             newCell = false;
             var newCells = new ArrayList<CellPanel>();
             for (var cell : cells) {
-                System.out.println("cell positon" + cell.getRow() + " " + cell.getColumn());
                 var neighbors = Utility.getDisplayPanel().getNeighbors(cell);
                 for (var neighbor : neighbors) {
-                    System.out.println("neighbor positon" + neighbor.getRow() + " " + neighbor.getColumn());
                     if (!cells.contains(neighbor) && neighbor.getColor() == cell.getColor()) {
-                        System.out.println("new neighbor positon" + neighbor.getRow() + " " + neighbor.getColumn());
                         newCells.add(neighbor);
                         newCell = true;
                     }

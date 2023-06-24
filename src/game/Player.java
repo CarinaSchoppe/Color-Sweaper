@@ -17,9 +17,9 @@ public class Player implements MoveValidator {
 
     private Game game;
 
-    public Player(Component component, Color color, String name) {
+    public Player(Component component, String name) {
         this.component = component;
-        this.color = color;
+        this.color = component.getCells().get(0).getBackground();
         this.name = name;
     }
 
@@ -42,14 +42,12 @@ public class Player implements MoveValidator {
     public void makeMove(int x, int y) {
         //player will click on a field.
         var panel = Utility.getDisplayPanel().getCellPanels()[x][y];
-        System.out.println("Player " + name + " clicked on " + x + " " + y);
-
         //check valid move
         if (!validateMove(panel)) {
             PopUpCreator.createPopUp("Invalid Move!", "Invalid Move");
             return;
         }
-        Utility.getColorPanel().updateCellPanelColor(panel, color);
+        Utility.getColorPanel().updateCellPanelColor(panel, this);
         component.addCell(panel);
         component.tracePath();
         endTurn();

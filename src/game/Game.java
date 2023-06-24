@@ -3,6 +3,7 @@ package game;
 import frontend.DisplayPanel;
 import frontend.GameWindow;
 import frontend.PopUpCreator;
+import logic.Strategies;
 import utility.Utility;
 
 public class Game {
@@ -34,11 +35,12 @@ public class Game {
 
     public static Game getGame() {
         if (game == null) {
-            var lowLeft = Utility.getDisplayPanel().getComponent(Utility.getDisplayPanel().getColumns() - 1, 0);
+            var lowLeft = Utility.getDisplayPanel().createComponent(Utility.getDisplayPanel().getColumns() - 1, 0);
             System.out.println(lowLeft.getCells().get(0).getColor());
-            var topRight = Utility.getDisplayPanel().getComponent(0, Utility.getDisplayPanel().getRows() - 1);
+            var topRight = Utility.getDisplayPanel().createComponent(0, Utility.getDisplayPanel().getRows() - 1);
             System.out.println(topRight.getCells().get(0).getColor());
-            game = new Game(new Player(lowLeft, lowLeft.getCells().get(0).getColor(), "S1"), new AIPlayer(topRight, topRight.getCells().get(0).getColor(), "S2"), Utility.getDisplayPanel());
+            var strategy = Strategies.getMatchingName(GameWindow.getStrategySelect().getSelectedItem().toString());
+            game = new Game(new Player(lowLeft, "S1"), new AIPlayer(topRight, "S2", strategy), Utility.getDisplayPanel());
             System.out.println("new game initialized");
         }
         return game;
@@ -89,6 +91,11 @@ public class Game {
         if (displayPanel.isFinalConfiguration()) {
             return true;
         }
+
+        if (displayPanel.noPossibleMove(getOpponent(currentPlayer))) {
+            return true;
+        }
+
         return unchangedMovesCount >= 4;
     }
 

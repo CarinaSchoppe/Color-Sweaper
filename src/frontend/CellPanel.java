@@ -52,4 +52,7 @@ public class CellPanel extends JPanel {
         return (Math.abs(this.row - panel.row) == 1 && this.column == panel.column)
                 || (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
     }
+
+    //get all neighbors of a cell
+  
 }

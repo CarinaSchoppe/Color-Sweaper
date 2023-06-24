@@ -35,4 +35,27 @@ public class Component {
         }
         return false;
     }
+
+
+    //should add all cells that are not already part of the component and that are adjacent to the component to the component when it has the same color 
+    public void tracePath() {
+        boolean newCell;
+        do {
+            newCell = false;
+            var newCells = new ArrayList<CellPanel>();
+            for (var cell : cells) {
+                System.out.println("cell positon" + cell.getRow() + " " + cell.getColumn());
+                var neighbors = Utility.getDisplayPanel().getNeighbors(cell);
+                for (var neighbor : neighbors) {
+                    System.out.println("neighbor positon" + neighbor.getRow() + " " + neighbor.getColumn());
+                    if (!cells.contains(neighbor) && neighbor.getColor() == cell.getColor()) {
+                        System.out.println("new neighbor positon" + neighbor.getRow() + " " + neighbor.getColumn());
+                        newCells.add(neighbor);
+                        newCell = true;
+                    }
+                }
+            }
+            cells.addAll(newCells);
+        } while (newCell);
+    }
 }

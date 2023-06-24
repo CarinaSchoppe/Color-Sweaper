@@ -39,7 +39,7 @@ public class DisplayPanel extends JPanel {
         repaint();
     }
 
-    public void generateRandomBoard() {
+    public Color[] generateRandomBoard() {
         this.removeAll();
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
@@ -55,6 +55,7 @@ public class DisplayPanel extends JPanel {
                 cellPanel.addMouseListener(new SelectColorAction());
                 cellPanels[i][j] = cellPanel;
                 cellPanels[i][j].setBackground(cellColor);
+
                 cellPanels[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 add(cellPanels[i][j]);
             }
@@ -70,9 +71,11 @@ public class DisplayPanel extends JPanel {
             cellPanels[rows - 1][0].setBackground(newColor);
             cellPanels[rows - 1][0].repaint();
         }
-
+        //korrekten farben!
         revalidate();
         repaint();
+
+        return new Color[]{cellPanels[columns - 1][0].getBackground(), cellPanels[0][rows - 1].getBackground()};
     }
 
     public Component getComponent(int row, int column) {
@@ -97,21 +100,19 @@ public class DisplayPanel extends JPanel {
 
     public List<CellPanel> getNeighbors(CellPanel cell) {
         var neighbors = new ArrayList<CellPanel>();
-
-        var dr = new int[]{-1, 0, 1, 0};
-        var dc = new int[]{0, 1, 0, -1};
-
-        for (int i = 0; i < 4; i++) {
-            var newRow = cell.getRow() + dr[i];
-            var newColumn = cell.getColumn() + dc[i];
-
-            if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns) {
-                var neighbor = cellPanels[newRow][newColumn];
-                if (areAdjacent(cell, neighbor)) {
-                    neighbors.add(neighbor);
-                }
-            }
-        }
+        var up = cell.getRow() - 1;
+        var down = cell.getRow() + 1;
+        var left = cell.getColumn() - 1;
+        var right = cell.getColumn() + 1;
+        if (up >= 0)
+            neighbors.add(cellPanels[up][cell.getColumn()]);
+        if (down < rows)
+            neighbors.add(cellPanels[down][cell.getColumn()]);
+        if (left >= 0)
+            neighbors.add(cellPanels[cell.getRow()][left]);
+        if (right < columns)
+            neighbors.add(cellPanels[cell.getRow()][right]);
+        
         return neighbors;
     }
 

@@ -27,6 +27,13 @@ public class ColorPanel extends JPanel {
         setLayout(new GridLayout(1, colorCount));
     }
 
+    public void updateCellPanelColor(CellPanel panel, Color color) {
+        panel.setColor(color);
+        panel.setBackground(color);
+        revalidate();
+        repaint();
+    }
+
     public void generateColorPanel() {
         for (int i = 0; i < colorCount; i++) {
             var panel = new JPanel();

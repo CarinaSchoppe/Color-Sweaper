@@ -1,5 +1,6 @@
 package frontend;
 
+import game.Game;
 import listeners.PlayPauseAction;
 import listeners.StartStopAction;
 import utility.Utility;
@@ -67,6 +68,10 @@ public class GameWindow {
         colorSpinner = new JSpinner(colorModel);
         menuPanel.add(colorSpinner);
         colorSpinner.addChangeListener(e -> {
+            if (Game.getGame().isGameRunning()) {
+                colorSpinner.setValue(colorSpinner.getPreviousValue());
+                return;
+            }
             var count = (Integer) colorSpinner.getValue();
             updateSelectedColors(count);
             Utility.getColorPanel().setColorCount((Integer) colorSpinner.getValue());
@@ -82,14 +87,28 @@ public class GameWindow {
         rowSpinner = new JSpinner(rowModel);
         menuPanel.add(rowSpinner);
 
-        rowSpinner.addChangeListener(e -> Utility.getDisplayPanel().setRows((Integer) rowSpinner.getValue()));
+        rowSpinner.addChangeListener(e -> {
+            if (Game.getGame().isGameRunning()) {
+                rowSpinner.setValue(rowSpinner.getPreviousValue());
+
+                return;
+            }
+            Utility.getDisplayPanel().setRows((Integer) rowSpinner.getValue());
+        });
 
         //Add column Spinner to MenuPanel
         var columnModel = new SpinnerNumberModel(6, 3, 10, 1);
         columnSpinner = new JSpinner(columnModel);
         menuPanel.add(columnSpinner);
 
-        columnSpinner.addChangeListener(e -> Utility.getDisplayPanel().setColumns((Integer) columnSpinner.getValue()));
+        columnSpinner.addChangeListener(e -> {
+            if (Game.getGame().isGameRunning()) {
+                columnSpinner.setValue(columnSpinner.getPreviousValue());
+
+                return;
+            }
+            Utility.getDisplayPanel().setColumns((Integer) columnSpinner.getValue());
+        });
 
         //Add strategy select Dropdown to menuPanel
         var strategies = new String[]{"Strategy01", "Strategy02", "Strategy03"};
@@ -110,6 +129,8 @@ public class GameWindow {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+                if (Game.getGame().isGameRunning())
+                    return;
                 int key = e.getKeyCode() - KeyEvent.VK_1 + 1;
                 if (key >= 1 && key <= Utility.getColorPanel().getColorCount()) {
                     Color selectedColor = Utility.getColorPanel().getColorPanels()[key - 1].getBackground();

@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class Player implements MoveValidator {
     private final Component component;
-    private final Color color;
+    private Color color;
 
     private final String name;
 
@@ -41,22 +41,21 @@ public class Player implements MoveValidator {
 
     public void makeMove(int x, int y) {
         //player will click on a field.
+        var panel = Utility.getDisplayPanel().getCellPanels()[x][y];
         System.out.println("Player " + name + " clicked on " + x + " " + y);
 
         //check valid move
-        var panel = Utility.getDisplayPanel().getCellPanels()[x][y];
         if (!validateMove(panel)) {
             PopUpCreator.createPopUp("Invalid Move!", "Invalid Move");
             return;
         }
-
-        panel.setColor(color);
+        Utility.getColorPanel().updateCellPanelColor(panel, color);
         component.addCell(panel);
+        component.tracePath();
         endTurn();
     }
 
     public void endTurn() {
-
         //check winning!
         if (game.checkWinning()) return;
         if (game.isGamePaused()) return;
@@ -77,11 +76,13 @@ public class Player implements MoveValidator {
     public boolean validateMove(CellPanel panel) {
         //check if the color is my own or is the opponents color
         if (panel.getColor().equals(color) || panel.getColor().equals(game.getOpponent(this).getColor())) {
-            System.out.println("Own color");
             return false;
         }
-
         //check if the component is adjecent to my component
         return component.isAdjacent(panel);
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

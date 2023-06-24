@@ -22,13 +22,17 @@ public class StartStopAction implements ActionListener {
             GameWindow.getTimerLabel().setText("00:00");
             Utility.getDisplayPanel().clearBoard();
             Game.getGame().stopGame();
+            Game.getGame().setGameRunning(false);
+
         } else {
             GameWindow.getStartStopButton().setText("Stop");
             GameWindow.getGameStatus().setText(" ");
             Utility.getColorPanel().refreshColors();
-            Utility.getDisplayPanel().generateRandomBoard();
+            var colors = Utility.getDisplayPanel().generateRandomBoard();
+            Game.getGame().getPlayer1().setColor(colors[0]);
+            Game.getGame().getPlayer2().setColor(colors[1]);
+            Game.getGame().setGameRunning(true);
         }
-        Game.getGame().setGameRunning(!Game.getGame().isGameRunning());
     }
     
 }

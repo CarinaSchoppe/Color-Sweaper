@@ -3,7 +3,6 @@ package game;
 import frontend.DisplayPanel;
 import frontend.GameWindow;
 import frontend.PopUpCreator;
-import utility.Component;
 import utility.Utility;
 
 public class Game {
@@ -35,7 +34,11 @@ public class Game {
 
     public static Game getGame() {
         if (game == null) {
-            game = new Game(new Player(Utility.getDisplayPanel().getComponent(Utility.getDisplayPanel().getColumns() - 1, 0), Utility.getDisplayPanel().getCellPanels()[Utility.getDisplayPanel().getColumns() - 1][0].getColor(), "S1"), new AIPlayer(Utility.getDisplayPanel().getComponent(0, Utility.getDisplayPanel().getRows() - 1), Utility.getDisplayPanel().getCellPanels()[0][Utility.getDisplayPanel().getRows() - 1].getColor(), "S2"), Utility.getDisplayPanel());
+            var lowLeft = Utility.getDisplayPanel().getComponent(Utility.getDisplayPanel().getColumns() - 1, 0);
+            System.out.println(lowLeft.getCells().get(0).getColor());
+            var topRight = Utility.getDisplayPanel().getComponent(0, Utility.getDisplayPanel().getRows() - 1);
+            System.out.println(topRight.getCells().get(0).getColor());
+            game = new Game(new Player(lowLeft, lowLeft.getCells().get(0).getColor(), "S1"), new AIPlayer(topRight, topRight.getCells().get(0).getColor(), "S2"), Utility.getDisplayPanel());
             System.out.println("new game initialized");
         }
         return game;
@@ -56,29 +59,6 @@ public class Game {
         currentPlayer.startPlayersTurn();
     }
 
-    //TODO: Make it better!
-    public Component updateComponent(Player player) {
-        var prevComponentSize = player.getComponent().getCells().size();
-        var component = player.getComponent();
-
-        //TODO Correct?
-        for (var cell : component.getCells()) {
-            cell.setColor(player.getColor());
-            for (var neighbor : displayPanel.getNeighbors(cell)) {
-                if (neighbor.getColor() == player.getColor() && !component.getCells().contains(neighbor)) {
-                    component.getCells().add(neighbor);
-                }
-
-            }
-        }
-        //Check if the component size has changed
-        if (player.getComponent().getCells().size() == prevComponentSize) {
-            unchangedMovesCount++;
-        } else {
-            unchangedMovesCount = 0;
-        }
-        return component;
-    }
 
     private Player getWinner() {
         if (player1.getComponent().getCells().size() > player2.getComponent().getCells().size()) {

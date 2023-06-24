@@ -22,8 +22,9 @@ public class SelectColorAction extends MouseAdapter {
 
         var currentPlayer = Game.getGame().getCurrentPlayer();
         if (currentPlayer instanceof AIPlayer aiPlayer) {
-            var position = aiPlayer.findPosition();
-            aiPlayer.makeMove(position[0], position[1]);
+            currentPlayer.makeMove(x, y);
+//            var position = aiPlayer.findPosition();
+//            aiPlayer.makeMove(position[0], position[1]);
         } else {
             currentPlayer.makeMove(x, y);
         }

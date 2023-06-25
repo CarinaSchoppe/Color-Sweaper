@@ -6,6 +6,8 @@ import frontend.PopUpCreator;
 import logic.Strategies;
 import utility.Utility;
 
+import java.util.Objects;
+
 public class Game {
     private Player player1;
     private Player player2;
@@ -20,9 +22,7 @@ public class Game {
     private Player currentPlayer;
 
 
-    public Game(Player player1, Player player2, DisplayPanel displayPanel) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public Game(DisplayPanel displayPanel) {
         this.displayPanel = displayPanel;
         this.unchangedMovesCount = 0;
         game = this;
@@ -35,13 +35,7 @@ public class Game {
 
     public static Game getGame() {
         if (game == null) {
-            var lowLeft = Utility.getDisplayPanel().createComponent(Utility.getDisplayPanel().getColumns() - 1, 0);
-            System.out.println(lowLeft.getCells().get(0).getColor());
-            var topRight = Utility.getDisplayPanel().createComponent(0, Utility.getDisplayPanel().getRows() - 1);
-            System.out.println(topRight.getCells().get(0).getColor());
-            var strategy = Strategies.getMatchingName(GameWindow.getStrategySelect().getSelectedItem().toString());
-            game = new Game(new Player(lowLeft, "S1"), new AIPlayer(topRight, "S2", strategy), Utility.getDisplayPanel());
-            System.out.println("new game initialized");
+            game = new Game(Utility.getDisplayPanel());
         }
         return game;
     }
@@ -51,11 +45,23 @@ public class Game {
     }
 
     public void initialize() {
+
         if (isInitialized) return;
         isInitialized = true;
+        System.out.println(Utility.getDisplayPanel().getRows() + " rowe");
+        System.out.println(Utility.getDisplayPanel().getColumns() + " cols");
+        System.out.println(Utility.getDisplayPanel().getCellPanels().length + " length col");
+        System.out.println(Utility.getDisplayPanel().getCellPanels()[0].length + " length row");
+        var topRight = Utility.getDisplayPanel().createComponent(Utility.getDisplayPanel().getRows() - 1, 0);
+        var lowLeft = Utility.getDisplayPanel().createComponent(0, Utility.getDisplayPanel().getColumns() - 1);
+        var strategy = Strategies.getMatchingName(Objects.requireNonNull(GameWindow.getStrategySelect().getSelectedItem()).toString());
+        this.player1 = new Player(lowLeft, "S1");
+        this.player2 = new AIPlayer(topRight, "S2", strategy);
         //select a random player as the current player
         player1.setGame(this);
         player2.setGame(this);
+        player2.getComponent().tracePath();
+        player1.getComponent().tracePath();
         var currentPlayerName = GameWindow.getPlayerSelect().getSelectedItem().toString();
         currentPlayer = currentPlayerName.equals(player1.getName()) ? player1 : player2;
         currentPlayer.startPlayersTurn();
@@ -180,6 +186,8 @@ public class Game {
 
 
     public void stopGame() {
+        game.setInitialized(false);
+        game.setGameRunning(false);
         Game.setGame(null);
     }
 }

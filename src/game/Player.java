@@ -39,9 +39,10 @@ public class Player implements MoveValidator {
     }
 
 
-    public void makeMove(int x, int y) {
+    public void makeMove(int row, int column) {
         //player will click on a field.
-        var panel = Utility.getDisplayPanel().getCellPanels()[x][y];
+
+        var panel = Utility.getDisplayPanel().getCellPanels()[column][row];
         //check valid move
         if (!validateMove(panel)) {
             PopUpCreator.createPopUp("Invalid Move!", "Invalid Move");
@@ -77,7 +78,8 @@ public class Player implements MoveValidator {
             return false;
         }
         //check if the component is adjecent to my component
-        return component.isAdjacent(panel);
+        var adj = component.isAdjacent(panel);
+        return adj;
     }
 
     public void setColor(Color color) {

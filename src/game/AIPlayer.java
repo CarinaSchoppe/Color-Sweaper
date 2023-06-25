@@ -14,13 +14,13 @@ public class AIPlayer extends Player implements Strategy {
     }
 
     @Override
-    public void makeMove(int x, int y) {
+    public void makeMove(int row, int column) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        super.makeMove(x, y);
+        super.makeMove(row, column);
     }
 
     public int[] findPosition() {

@@ -17,6 +17,10 @@ public class GameWindow {
     private static JSpinner colorSpinner;
     private static JSpinner rowSpinner;
     private static JSpinner columnSpinner;
+
+    private static int colPrev = 0;
+    private static int coluPrev = 0;
+    private static int rowPrev = 0;
     private static JComboBox<String> strategySelect;
     private static JLabel timerLabel;
 
@@ -69,19 +73,17 @@ public class GameWindow {
         menuPanel.add(colorSpinner);
         colorSpinner.addChangeListener(e -> {
             if (Game.getGame().isGameRunning()) {
-                colorSpinner.setValue(colorSpinner.getPreviousValue());
+                colorSpinner.setValue(colPrev);
                 return;
             }
             var count = (Integer) colorSpinner.getValue();
             updateSelectedColors(count);
             Utility.getColorPanel().setColorCount((Integer) colorSpinner.getValue());
             Utility.getColorPanel().refreshColors();
-            if (startStopButton.getText().equals("Stop")) {
-                Utility.getDisplayPanel().generateRandomBoard();
-            }
+            colPrev = count;
+
         });
         updateSelectedColors((Integer) colorModel.getValue());
-
         //Add row Spinner to MenuPanel
         var rowModel = new SpinnerNumberModel(6, 3, 10, 1);
         rowSpinner = new JSpinner(rowModel);
@@ -89,11 +91,11 @@ public class GameWindow {
 
         rowSpinner.addChangeListener(e -> {
             if (Game.getGame().isGameRunning()) {
-                rowSpinner.setValue(rowSpinner.getPreviousValue());
-
+                rowSpinner.setValue(rowPrev);
                 return;
             }
             Utility.getDisplayPanel().setRows((Integer) rowSpinner.getValue());
+            rowPrev = (Integer) rowSpinner.getValue();
         });
 
         //Add column Spinner to MenuPanel
@@ -103,11 +105,11 @@ public class GameWindow {
 
         columnSpinner.addChangeListener(e -> {
             if (Game.getGame().isGameRunning()) {
-                columnSpinner.setValue(columnSpinner.getPreviousValue());
-
+                columnSpinner.setValue(coluPrev);
                 return;
             }
             Utility.getDisplayPanel().setColumns((Integer) columnSpinner.getValue());
+            coluPrev = (Integer) columnSpinner.getValue();
         });
 
         //Add strategy select Dropdown to menuPanel

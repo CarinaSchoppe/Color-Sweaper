@@ -29,26 +29,18 @@ public class ColorPanel extends JPanel {
     }
 
     public void updateCellPanelColor(CellPanel panel, Player player) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                var color = panel.getBackground();
-                panel.setOpaque(true);
-                player.setColor(color);
-                System.out.println("neu: " + color);
-                for (var cell : player.getComponent().getCells()) {
-                    cell.setColor(color);
-                    cell.setBackground(color);
-                    cell.setOpaque(true);
-                    System.out.println("Cell color: " + cell.getBackground() + " position: " + cell.getRow() + " " + cell.getColumn());
-                    cell.revalidate();
-                    cell.repaint();
-                }
-
-                System.out.println(player.getComponent().getCells().get(0).getColor() + " " + player.getComponent().getCells().get(0).getBackground() + " " + player.getComponent().getCells().get(0).getRow() + " " + player.getComponent().getCells().get(0).getColumn());
-
-            }
-        });
+        var color = panel.getBackground();
+        panel.setOpaque(true);
+        player.setColor(color);
+        for (var cell : player.getComponent().getCells()) {
+            cell.setColor(color);
+            cell.setBackground(color);
+            cell.setOpaque(true);
+            cell.revalidate();
+            cell.repaint();
+        }
     }
+
 
     public void generateColorPanel() {
         for (int i = 0; i < colorCount; i++) {
@@ -74,7 +66,6 @@ public class ColorPanel extends JPanel {
         primarySetup();
 
         removeAll();
-
         for (var i = 0; i < colorCount; i++) {
             var panel = new JPanel();
             panel.setBackground(Utility.getSelectedColors()[i]);

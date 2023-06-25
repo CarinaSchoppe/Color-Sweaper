@@ -6,13 +6,12 @@ import java.awt.*;
 public class CellPanel extends JPanel {
     private int row;
     private int column;
-    private boolean isStartingField;
     private Color color;
 
-    public CellPanel(Color color, int row, int column, boolean isStartingField) {
+    public CellPanel(Color color, int row, int column) {
         this.row = row;
         this.column = column;
-        this.isStartingField = isStartingField;
+
         this.color = color;
     }
 
@@ -32,13 +31,6 @@ public class CellPanel extends JPanel {
         this.column = column;
     }
 
-    public boolean isStartingField() {
-        return isStartingField;
-    }
-
-    public void setStartingField(boolean startingField) {
-        isStartingField = startingField;
-    }
 
     public Color getColor() {
         return color;
@@ -49,10 +41,13 @@ public class CellPanel extends JPanel {
     }
 
     public boolean isAdjacent(CellPanel panel) {
+        var a = Math.abs(this.row - panel.row) == 1;
+        System.out.println(a);
+        var b = (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
+        System.out.println(b);
         return (Math.abs(this.row - panel.row) == 1 && this.column == panel.column)
                 || (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
     }
 
-    //get all neighbors of a cell
-  
+
 }

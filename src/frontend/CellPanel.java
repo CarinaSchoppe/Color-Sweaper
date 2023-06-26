@@ -41,10 +41,6 @@ public class CellPanel extends JPanel {
     }
 
     public boolean isAdjacent(CellPanel panel) {
-        var a = Math.abs(this.row - panel.row) == 1;
-        System.out.println(a);
-        var b = (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
-        System.out.println(b);
         return (Math.abs(this.row - panel.row) == 1 && this.column == panel.column)
                 || (Math.abs(this.column - panel.column) == 1 && this.row == panel.row);
     }

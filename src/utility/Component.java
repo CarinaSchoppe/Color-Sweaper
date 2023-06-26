@@ -26,9 +26,6 @@ public class Component {
     public boolean isAdjacent(CellPanel panel) {
         //go through all of my components and check if it is adjacent to any of them
         for (var cell : cells) {
-            System.out.println("checking cell");
-            System.out.println("coords of cell:" + cell.getRow() + " " + cell.getColumn());
-            System.out.println("coords of panel:" + panel.getRow() + " " + panel.getColumn());
             if (cell.isAdjacent(panel)) {
                 return true;
             }

@@ -17,9 +17,11 @@ public class SelectColorAction extends MouseAdapter {
         //get current Player
         var row = panel.getRow();
         var col = panel.getColumn();
+        var color = panel.getColor();
         if (!Game.getGame().isInitialized()) return;
 
         System.out.println("row: " + row + " col: " + col);
+        System.out.println("Color: " + color);
 
         var currentPlayer = Game.getGame().getCurrentPlayer();
         if (currentPlayer instanceof AIPlayer aiPlayer) {

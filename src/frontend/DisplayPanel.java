@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DisplayPanel extends JPanel {
@@ -21,60 +22,88 @@ public class DisplayPanel extends JPanel {
     public DisplayPanel(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        setLayout(new GridLayout(rows, columns));
+        setLayout(new GridLayout(columns, rows));
         setRows(rows);
         setColumns(columns);
 
     }
 
+
     private void updateBoardSize() {
-        setLayout(new GridLayout(rows, columns));
+        //DO NOT TOUCH THIS METHOD
+        setLayout(new GridLayout(columns, rows));
         removeAll();
-        for (int row = 0; row < rows; row++) {
-            for (int cols = 0; cols < columns; cols++) {
-                cellPanels[cols][row].setBackground(Color.CYAN);
-                add(cellPanels[cols][row]);
+        for (int column = 0; column < columns; column++) {
+            for (int row = 0; row < rows; row++) {
+                add(cellPanels[column][row]);
             }
         }
         revalidate();
         repaint();
     }
 
+    public Color getUniqueColor(int row, int column) {
+        Set<Color> adjacentColors = new HashSet<>();
+        // Überprüfe die umliegenden Zellen und füge ihre Farben zum Set hinzu
+        for (int i = Math.max(0, row - 1); i <= Math.min(this.rows - 1, row + 1); i++) {
+            for (int j = Math.max(0, column - 1); j <= Math.min(this.columns - 1, column + 1); j++) {
+                if ((i != row || j != column) && cellPanels[j][i] != null) { // Ignoriere die aktuelle Zelle
+                    adjacentColors.add(cellPanels[j][i].getBackground());
+                }
+            }
+        }
+
+        // Wähle eine neue Farbe, die nicht im Set ist
+        Color newColor;
+        do {
+            newColor = Utility.randomColor();
+        } while (adjacentColors.contains(newColor));
+
+        return newColor;
+    }
 
     public void generateRandomBoard() {
         this.removeAll();
-        for (var row = 0; row < this.rows; row++) {
-            for (var column = 0; column < this.columns; column++) {
+        Color previousColor = null;
+        for (var column = 0; column < this.columns; column++) {
+            for (var row = 0; row < this.rows; row++) {
                 Color cellColor;
                 //color the fields in different colors
+                //Get matching color
                 do {
-                    cellColor = Utility.randomColor();
-                } while ((row > 0 && cellColor.equals(cellPanels[column][row - 1].getBackground()))
-                        || (column > 0 && cellColor.equals(cellPanels[column - 1][row].getBackground())));
+                    cellColor = getUniqueColor(row, column);
+                } while (cellColor.equals(previousColor)); // Generiere eine neue Farbe, solange sie gleich der vorherigen ist
+
 
                 var cellPanel = new CellPanel(cellColor, row, column);
                 cellPanel.addMouseListener(new SelectColorAction());
                 cellPanels[column][row] = cellPanel;
                 cellPanel.setBackground(cellColor);
-
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 add(cellPanel);
+                previousColor = cellColor;
             }
         }
 
-        // If the bottom-left and top-right squares have the same color, change the color of the bottom-left square
-        while (cellPanels[columns - 1][0].getBackground().equals(cellPanels[0][rows - 1].getBackground())) {
-            Color newColor;
-            do {
-                newColor = Utility.randomColor();
-            } while (newColor.equals(cellPanels[columns - 1][0].getBackground()));
+        colorEdges();
 
-            cellPanels[0][rows - 1].setBackground(newColor);
-            cellPanels[0][rows - 1].repaint();
-        }
-        //korrekten farben!
         revalidate();
         repaint();
+    }
+
+
+    private void colorEdges() {
+        var topRight = cellPanels[0][rows - 1];
+        var bottomLeft = cellPanels[columns - 1][0];
+
+        //make sure these both have different colors
+        while (topRight.getBackground().equals(bottomLeft.getBackground())) {
+            var color = getUniqueColor(0, columns - 1);
+            bottomLeft.setBackground(color);
+            bottomLeft.setColor(color);
+        }
+
+
     }
 
     public Component createComponent(int row, int column) {
@@ -116,9 +145,9 @@ public class DisplayPanel extends JPanel {
 
     public boolean isFinalConfiguration() {
         //iterate over all Cell panels
-        for (var i = 0; i < rows; i++) {
-            for (var j = 0; j < columns; j++) {
-                var cell = cellPanels[i][j];
+        for (var column = 0; column < rows; column++) {
+            for (var row = 0; row < rows; row++) {
+                var cell = cellPanels[column][row];
                 //check if the cell is eighter the color of player1 or player2 if not return false
                 if (cell.getBackground() != Game.getGame().getPlayer1().getColor() && cell.getBackground() != Game.getGame().getPlayer2().getColor()) {
                     return false;
@@ -140,11 +169,8 @@ public class DisplayPanel extends JPanel {
 
     public void setRows(int rows) {
         this.rows = rows;
+        System.out.println("rows v: " + rows);
         cellPanelsCreation(columns, rows);
-        System.out.println(getRows() + " rows1");
-        System.out.println(getColumns() + " cols1");
-        System.out.println(getCellPanels().length + " length col1");
-        System.out.println(getCellPanels()[0].length + " length row1");
     }
 
     public int getColumns() {
@@ -158,10 +184,10 @@ public class DisplayPanel extends JPanel {
 
     private void cellPanelsCreation(int columns, int rows) {
         cellPanels = new CellPanel[columns][rows];
-        for (var i = 0; i < columns; i++) {
-            for (var j = 0; j < rows; j++) {
-                var panel = new CellPanel(Color.CYAN, i, j);
-                cellPanels[i][j] = panel;
+        for (var column = 0; column < columns; column++) {
+            for (var row = 0; row < rows; row++) {
+                var panel = new CellPanel(Color.CYAN, row, column);
+                cellPanels[column][row] = panel;
             }
         }
         updateBoardSize();

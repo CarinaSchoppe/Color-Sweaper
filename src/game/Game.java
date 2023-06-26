@@ -48,10 +48,6 @@ public class Game {
 
         if (isInitialized) return;
         isInitialized = true;
-        System.out.println(Utility.getDisplayPanel().getRows() + " rowe");
-        System.out.println(Utility.getDisplayPanel().getColumns() + " cols");
-        System.out.println(Utility.getDisplayPanel().getCellPanels().length + " length col");
-        System.out.println(Utility.getDisplayPanel().getCellPanels()[0].length + " length row");
         var topRight = Utility.getDisplayPanel().createComponent(Utility.getDisplayPanel().getRows() - 1, 0);
         var lowLeft = Utility.getDisplayPanel().createComponent(0, Utility.getDisplayPanel().getColumns() - 1);
         var strategy = Strategies.getMatchingName(Objects.requireNonNull(GameWindow.getStrategySelect().getSelectedItem()).toString());

@@ -29,6 +29,17 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    public CellPanel[][] cloneCellPanels() {
+        //create a clone of that cellPanels and there objects
+        CellPanel[][] clone = new CellPanel[columns][rows];
+        for (var column = 0; column < columns; column++) {
+            for (var row = 0; row < rows; row++) {
+                clone[column][row] = new CellPanel(cellPanels[column][row].getColor(), row, column);
+            }
+        }
+        return clone;
+    }
+
     private void updateBoardSize() {
         setLayout(new GridLayout(columns, rows));
         removeAll();

@@ -1,6 +1,5 @@
 package listeners;
 
-import frontend.CellPanel;
 import frontend.PopUpCreator;
 import game.AIPlayer;
 import game.Game;
@@ -8,7 +7,6 @@ import utility.Utility;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.HashSet;
 
 public class KeyboardControlListener extends AbstractAction {
 
@@ -20,16 +18,11 @@ public class KeyboardControlListener extends AbstractAction {
 
         var panel = Utility.getColorPanel().getColorPanels()[number - 1];
         var color = panel.getBackground();
-        var adjCells = new HashSet<CellPanel>();
         var player = Game.getGame().getCurrentPlayer();
         var component = player.getComponent();
-        for (var cell : component.getCells()) {
-            adjCells.addAll(cell.getAdjacentCells(cell));
-        }
-        component.getCells().forEach(adjCells::remove);
 
         //any cell that has the color 
-        var cell = adjCells.stream().filter(cellPanel -> cellPanel.getBackground().equals(color)).findFirst().orElse(null);
+        var cell = component.adjacentCellsOfComponent().stream().filter(cellPanel -> cellPanel.getBackground().equals(color)).findFirst().orElse(null);
         if (cell == null) {
             PopUpCreator.createPopUp("No possible color for that key!", "Invalid Move");
             return;

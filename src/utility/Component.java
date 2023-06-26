@@ -3,6 +3,7 @@ package utility;
 import frontend.CellPanel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Component {
@@ -33,6 +34,15 @@ public class Component {
         return false;
     }
 
+
+    public HashSet<CellPanel> adjacentCellsOfComponent() {
+        var adjCells = new HashSet<CellPanel>();
+        for (var cell : getCells()) {
+            adjCells.addAll(cell.getAdjacentCells(cell));
+        }
+        getCells().forEach(adjCells::remove);
+        return adjCells;
+    }
 
     //should add all cells that are not already part of the component and that are adjacent to the component to the component when it has the same color 
     public void tracePath() {

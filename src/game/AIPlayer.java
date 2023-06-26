@@ -23,9 +23,15 @@ public class AIPlayer extends Player implements Strategy {
         super.makeMove(row, column);
     }
 
-    public int[] findPosition() {
-        return new int[0];
+    public void perform() {
+        var position = switch (strategy) {
+            case GREEDY -> greedyStrategy();
+            case BLOCKING -> blockingStrategy();
+            case STAGNATION -> stagnationStrategy();
+        };
+        makeMove(position[0], position[1]);
     }
+
 
     @Override
     public int[] greedyStrategy() {
@@ -42,9 +48,6 @@ public class AIPlayer extends Player implements Strategy {
         return new int[0];
     }
 
-    public Strategies getStrategy() {
-        return strategy;
-    }
 
     public void setStrategy(Strategies strategy) {
         this.strategy = strategy;

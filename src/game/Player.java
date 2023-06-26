@@ -68,7 +68,11 @@ public class Player implements MoveValidator {
 
 
     public void startPlayersTurn() {
-        PopUpCreator.createPopUp("The Player " + name + " is selected as the current player", "Beginning Player");
+        if (this instanceof AIPlayer ai) {
+            ai.perform();
+        } else {
+            PopUpCreator.createPopUp("The Player " + name + " is selected as the current player", "Beginning Player");
+        }
     }
 
     @Override

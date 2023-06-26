@@ -2,6 +2,7 @@ package frontend;
 
 import game.AIPlayer;
 import game.Game;
+import listeners.KeyboardControlListener;
 import listeners.PlayPauseAction;
 import listeners.StartStopAction;
 import logic.Strategies;
@@ -33,6 +34,16 @@ public class GameWindow {
 
         //Set size of the Frame
         frame.setSize(600, 600);
+        for (int i = 1; i <= 9; i++) {
+            String key = String.valueOf(i);
+            String numpadKey = "NUMPAD" + i;
+            frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), key);
+            frame.getRootPane().getActionMap().put(key, new KeyboardControlListener());
+
+            frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(numpadKey), numpadKey);
+            frame.getRootPane().getActionMap().put(numpadKey, new KeyboardControlListener());
+
+        }
 
         //Set Minimum Size
         frame.setMinimumSize(new Dimension(600, 600));

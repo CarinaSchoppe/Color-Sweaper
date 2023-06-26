@@ -30,7 +30,6 @@ public class DisplayPanel extends JPanel {
 
 
     private void updateBoardSize() {
-        //DO NOT TOUCH THIS METHOD
         setLayout(new GridLayout(columns, rows));
         removeAll();
         for (int column = 0; column < columns; column++) {

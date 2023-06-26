@@ -42,12 +42,12 @@ public class ColorPanel extends JPanel {
 
 
     public void generateColorPanel() {
+        removeAll();
         for (int i = 0; i < colorCount; i++) {
             var panel = new JPanel();
             panel.setBackground(Utility.getSelectedColors()[i]);
             colorPanels[i] = panel;
             add(panel);
-
             var label = new JLabel(String.valueOf(i + 1));
             colorLabels[i] = label;
             add(label);
@@ -56,7 +56,6 @@ public class ColorPanel extends JPanel {
 
     public void refreshColors() {
         primarySetup();
-
         removeAll();
         for (var i = 0; i < colorCount; i++) {
             var panel = new JPanel();

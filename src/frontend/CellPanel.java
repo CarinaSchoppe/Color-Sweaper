@@ -1,7 +1,10 @@
 package frontend;
 
+import utility.Utility;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashSet;
 
 public class CellPanel extends JPanel {
     private int row;
@@ -46,4 +49,7 @@ public class CellPanel extends JPanel {
     }
 
 
+    public HashSet<CellPanel> getAdjacentCells(CellPanel panel) {
+        return new HashSet<>(Utility.getDisplayPanel().getNeighbors(panel));
+    }
 }

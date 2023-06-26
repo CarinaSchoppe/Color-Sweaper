@@ -5,8 +5,7 @@ import utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class ColorPanel extends JPanel {
     private JPanel[] colorPanels;
@@ -52,13 +51,6 @@ public class ColorPanel extends JPanel {
             var label = new JLabel(String.valueOf(i + 1));
             colorLabels[i] = label;
             add(label);
-
-            colorPanels[i].addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    panel.setBackground(Utility.generateRandomColor());
-                }
-            });
         }
     }
 

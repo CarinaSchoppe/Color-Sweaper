@@ -169,7 +169,6 @@ public class DisplayPanel extends JPanel {
 
     public void setRows(int rows) {
         this.rows = rows;
-        System.out.println("rows v: " + rows);
         cellPanelsCreation(columns, rows);
     }
 

@@ -4,7 +4,6 @@ public enum Strategies {
 
     STAGNATION("Stagnation"),
     GREEDY("Greedy"),
-    BLOCKING("Blocking"),
 
     MULTIPLAYER("Multiplayer");
 

@@ -66,7 +66,6 @@ public class AIPlayer extends Player implements Strategy {
     public void perform() {
         var positions = switch (strategy) {
             case GREEDY -> greedyStrategy();
-            case BLOCKING -> blockingStrategy();
             case STAGNATION -> stagnationStrategy();
             default -> throw new IllegalStateException("Unexpected value: " + strategy);
         };

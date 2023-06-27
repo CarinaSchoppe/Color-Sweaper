@@ -227,7 +227,7 @@ public class GameWindow {
         });
 
         //Add strategy select Dropdown to menuPanel
-        var strategies = new String[]{Strategies.STAGNATION.getName(), Strategies.BLOCKING.getName(), Strategies.GREEDY.getName(), Strategies.MULTIPLAYER.getName()};
+        var strategies = new String[]{Strategies.STAGNATION.getName(), Strategies.GREEDY.getName(), Strategies.MULTIPLAYER.getName()};
         strategySelect = new JComboBox<>(strategies);
         strategy = (String) strategySelect.getSelectedItem();
         menuPanel.add(strategySelect);

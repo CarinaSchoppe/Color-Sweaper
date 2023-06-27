@@ -1,10 +1,11 @@
-package frontend;
+package me.carinaschoppe.frontend;
 
-import game.Game;
-import listeners.KeyboardControlListener;
-import listeners.PlayPauseAction;
-import listeners.StartStopAction;
-import utility.Utility;
+
+import me.carinaschoppe.game.Game;
+import me.carinaschoppe.listeners.KeyboardControlListener;
+import me.carinaschoppe.listeners.PlayPauseAction;
+import me.carinaschoppe.listeners.StartStopAction;
+import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,29 +48,26 @@ public class GameWindow {
     private static JSpinner rowSpinner;
     /**
      * Private static JSpinner variable columnSpinner holds an instance of JSpinner,
-     * which displays the value of a specified column in a table. 
-     * The spinner allows the user to select a valid column number to display. 
-     *
+     * which displays the value of a specified column in a table.
+     * The spinner allows the user to select a valid column number to display.
+     * <p>
      * This variable is used in conjunction with a table to allow the user to select
      * the column they would like to display a value for.
-     *
-     * Note: This variable is only used internally and is not intended to be accessed 
-     * or modified externally. 
+     * <p>
+     * Note: This variable is only used internally and is not intended to be accessed
+     * or modified externally.
      */
     private static JSpinner columnSpinner;
     /**
      * Integer variable representing the previous column in a table or grid.
-     * This variable is used to keep track of the column that was accessed or 
-     * modified previously so that the program can make decisions based on it. 
-     *
-     * @see #getColPrev()
-     * @see #setColPrev(int)
+     * This variable is used to keep track of the column that was accessed or
+     * modified previously so that the program can make decisions based on it.
      */
     private static int colPrev = 0;
     /**
      * Represents the previous column index for a specific operation.
      * This variable is static and private, meaning it can only be accessed within this class.
-     * The default value is 0, which is used as the initial value for the previous column 
+     * The default value is 0, which is used as the initial value for the previous column
      * when no other value has been assigned yet.
      */
     private static int coluPrev = 0;
@@ -89,7 +87,7 @@ public class GameWindow {
     private static JLabel timerLabel;
 
     /**
-     * This variable represents the current points of player 1 in the game. 
+     * This variable represents the current points of player 1 in the game.
      * It is a private static JLabel object and can be accessed using its getter method.
      * It is used to display the points of player 1 on the GUI of the game.
      */
@@ -109,21 +107,18 @@ public class GameWindow {
      * Its visibility is private, so it can only be accessed within the class in which it is defined.
      * Its data type is String, meaning it can hold alphanumeric characters and is immutable.
      * Its initial value is null, so it must be assigned a value before it can be used.
-     *
+     * <p>
      * Example:
-     *     strategy = "Aggressive";
-     *
-     * @see ClassName
-     * @see OtherClassName
+     * strategy = "Aggressive";
      */
     private static String strategy;
     /**
      * Represents the game status label on the user interface.
      * This variable holds a reference to a JLabel object which is used to display the current status of the game to the user.
      * This label is used to display messages like "Player won", "Game Tied", "It's player 1's turn".
-     *
+     * <p>
      * As it is a static variable, it is shared among all instances of the class in which it is declared.
-     *
+     * <p>
      * The variable is private to provide encapsulation of the game status and it is only accessible within the same class.
      */
     private static JLabel gameStatus;
@@ -320,6 +315,7 @@ public class GameWindow {
      * maximum values for the spinner are set to 4 and 9 respectively, with a step size of 1. A change listener is also
      * added to the spinner to update the color panel and prevent changes during game play.
      * <p>
+     *
      * @return the color spinner used in the game window's menu panel.
      */
     public static JSpinner getColorSpinner() {

@@ -1,6 +1,7 @@
-package frontend;
+package me.carinaschoppe.frontend;
 
-import utility.Utility;
+
+import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,8 +34,8 @@ public class CellPanel extends JPanel {
     /**
      * Constructs a CellPanel object with specified color, row and column.
      *
-     * @param color the color of the cell
-     * @param row the row of the cell in a grid
+     * @param color  the color of the cell
+     * @param row    the row of the cell in a grid
      * @param column the column of the cell in a grid
      */
     public CellPanel(Color color, int row, int column) {

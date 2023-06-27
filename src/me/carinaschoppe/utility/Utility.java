@@ -1,7 +1,8 @@
-package utility;
+package me.carinaschoppe.utility;
 
-import frontend.ColorPanel;
-import frontend.DisplayPanel;
+
+import me.carinaschoppe.frontend.ColorPanel;
+import me.carinaschoppe.frontend.DisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,10 +56,10 @@ public class Utility {
     /**
      * Represents a private static class-level variable, which holds an instance of DisplayPanel.
      *
-     * <p> DisplayPanel is a UI component which renders content on the screen. This variable holds an 
+     * <p> DisplayPanel is a UI component which renders content on the screen. This variable holds an
      * instance of DisplayPanel, which can be used by other classes to manage and update the displayed content.</p>
      *
-     * <p>This variable is marked as private and static which means that it can be accessed only within the class where it is 
+     * <p>This variable is marked as private and static which means that it can be accessed only within the class where it is
      * declared, and it will hold the same value for all instances of the class.</p>
      *
      * @see DisplayPanel
@@ -167,7 +168,7 @@ public class Utility {
     /**
      * This method returns a randomly selected color from the pre-defined set of colors.
      *
-     * @return a randomly selected Color object 
+     * @return a randomly selected Color object
      **/
     public static java.awt.Color randomColor() {
         return Utility.getSelectedColors()[random.nextInt(Utility.getSelectedColors().length)];

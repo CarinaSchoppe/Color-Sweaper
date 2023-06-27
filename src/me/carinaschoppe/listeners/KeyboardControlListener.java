@@ -1,9 +1,9 @@
-package listeners;
+package me.carinaschoppe.listeners;
 
-import frontend.PopUpCreator;
-import game.AIPlayer;
-import game.Game;
-import utility.Utility;
+import me.carinaschoppe.frontend.PopUpCreator;
+import me.carinaschoppe.game.AIPlayer;
+import me.carinaschoppe.game.Game;
+import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

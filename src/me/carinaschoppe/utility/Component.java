@@ -1,8 +1,8 @@
-package utility;
+package me.carinaschoppe.utility;
 
-import frontend.CellPanel;
-import frontend.GameWindow;
-import game.Game;
+import me.carinaschoppe.frontend.CellPanel;
+import me.carinaschoppe.frontend.GameWindow;
+import me.carinaschoppe.game.Game;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -102,7 +102,7 @@ public class Component {
             }
             cells.addAll(newCells);
         } while (newCell);
-        
+
         //update jlabel text:
         GameWindow.getPlayer1Points().setText("Player 1: " + Game.getGame().getPlayer1().getComponent().getCells().size());
         GameWindow.getPlayer2Points().setText("Player 2: " + Game.getGame().getPlayer2().getComponent().getCells().size());

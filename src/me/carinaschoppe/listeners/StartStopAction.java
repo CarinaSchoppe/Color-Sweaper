@@ -1,8 +1,9 @@
-package listeners;
+package me.carinaschoppe.listeners;
 
-import frontend.GameWindow;
-import game.Game;
-import utility.Utility;
+
+import me.carinaschoppe.frontend.GameWindow;
+import me.carinaschoppe.game.Game;
+import me.carinaschoppe.utility.Utility;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

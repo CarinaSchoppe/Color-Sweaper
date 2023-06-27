@@ -1,7 +1,8 @@
-package frontend;
+package me.carinaschoppe.frontend;
 
-import game.Player;
-import utility.Utility;
+
+import me.carinaschoppe.game.Player;
+import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,8 @@ public class ColorPanel extends JPanel {
     private int colorCount;
 
     /**
-     * Constructs*/
+     * Constructs
+     */
     public ColorPanel(int colorCount) {
         this.colorCount = colorCount;
         primarySetup();
@@ -37,7 +39,7 @@ public class ColorPanel extends JPanel {
 
 
     /**
-     * Initializes the colorPanels and colorLabels arrays with the given colorCount. 
+     * Initializes the colorPanels and colorLabels arrays with the given colorCount.
      * Sets the layout of the container to have one row and colorCount columns.
      */
     private void primarySetup() {

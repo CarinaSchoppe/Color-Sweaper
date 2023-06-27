@@ -1,6 +1,7 @@
-package logic;
+package me.carinaschoppe.logic;
 
-import frontend.CellPanel;
+
+import me.carinaschoppe.frontend.CellPanel;
 
 public interface MoveValidator {
 

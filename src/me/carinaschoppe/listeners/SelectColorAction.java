@@ -1,8 +1,7 @@
-package listeners;
+package me.carinaschoppe.listeners;
 
-import frontend.CellPanel;
-import game.AIPlayer;
-import game.Game;
+import me.carinaschoppe.frontend.CellPanel;
+import me.carinaschoppe.game.Game;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,13 +25,8 @@ public class SelectColorAction extends MouseAdapter {
         if (!Game.getGame().isInitialized()) return;
 
         var currentPlayer = Game.getGame().getCurrentPlayer();
-        if (currentPlayer instanceof AIPlayer aiPlayer) {
-            currentPlayer.makeMove(row, col);
-//            var position = aiPlayer.findPosition();
-//            aiPlayer.makeMove(position[0], position[1]);
-        } else {
-            currentPlayer.makeMove(row, col);
-        }
-                
+        currentPlayer.makeMove(row, col);
+
+
     }
 }

@@ -1,4 +1,4 @@
-package logic;
+package me.carinaschoppe.logic;
 
 public interface Strategy {
     /**
@@ -23,8 +23,9 @@ public interface Strategy {
     /**
      * Computes the stagnation strategy for a given task.
      * The method calculates how long a task can remain inactive before considering it as "stagnant".
+     *
      * @return an array of integers representing the time, in seconds, at which a task is considered "stagnant"
      */
     int[] stagnationStrategy();
-    
+
 }

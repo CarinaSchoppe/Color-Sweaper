@@ -1,4 +1,4 @@
-package frontend;
+package me.carinaschoppe.frontend;
 
 public class PopUpCreator {
 

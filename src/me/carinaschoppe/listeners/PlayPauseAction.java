@@ -1,9 +1,9 @@
-package listeners;
+package me.carinaschoppe.listeners;
 
-import frontend.GameWindow;
-import frontend.PopUpCreator;
-import game.Game;
-import utility.Utility;
+import me.carinaschoppe.frontend.GameWindow;
+import me.carinaschoppe.frontend.PopUpCreator;
+import me.carinaschoppe.game.Game;
+import me.carinaschoppe.utility.Utility;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +20,7 @@ public class PlayPauseAction implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!Game.getGame().isGameRunning()) return;    
+        if (!Game.getGame().isGameRunning()) return;
         if (Game.getGame().isGamePaused()) {
             //check if game is initialized
             Utility.getTimer().start();
@@ -36,7 +36,7 @@ public class PlayPauseAction implements ActionListener {
             GameWindow.getPlayPauseButton().setText("Pause");
         } else {
             GameWindow.getPlayPauseButton().setText("Play");
-            
+
             Utility.getTimer().stop();
             //Disable the setting options
             Game.getGame().pauseGame();

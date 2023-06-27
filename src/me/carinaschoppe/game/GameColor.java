@@ -1,4 +1,4 @@
-package game;
+package me.carinaschoppe.game;
 
 import java.util.Arrays;
 import java.util.Comparator;

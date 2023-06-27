@@ -1,10 +1,10 @@
-package game;
+package me.carinaschoppe.game;
 
-import frontend.DisplayPanel;
-import frontend.GameWindow;
-import frontend.PopUpCreator;
-import logic.Strategies;
-import utility.Utility;
+import me.carinaschoppe.frontend.DisplayPanel;
+import me.carinaschoppe.frontend.GameWindow;
+import me.carinaschoppe.frontend.PopUpCreator;
+import me.carinaschoppe.logic.Strategies;
+import me.carinaschoppe.utility.Utility;
 
 import java.util.Objects;
 
@@ -13,11 +13,11 @@ public class Game {
      * The "game" variable holds a reference to an instance of the Game class. It is declared as private
      * and static to limit its visibility to the containing class, and to allow access to it from static
      * methods within the class.
-     *
+     * <p>
      * The Game class is responsible for managing the game state, running the game loop, and rendering the
      * game graphics. By keeping a reference to a single instance of the Game class in the "game" variable,
      * we can ensure that there is only one active game instance running at any given time.
-     *
+     * <p>
      * This variable should be used with caution, as it can be easily manipulated by other parts of the code
      * if not properly protected. It is recommended to use the public methods provided by the Game class to
      * interact with the game state and avoid direct manipulation of the "game" variable.
@@ -55,15 +55,15 @@ public class Game {
     private boolean gameRunning;
     /**
      * Represents whether the game is currently paused or not.
-     * If the value is true, the game is paused. 
+     * If the value is true, the game is paused.
      * If the value is false, the game is currently running.
      */
     private boolean gamePaused = true;
     /**
      * Holds the current player of the game.
-     *
+     * <p>
      * This variable is used to keep track of which player's turn it is in the game.
-     * It is of type Player, which represents a player of the game. 
+     * It is of type Player, which represents a player of the game.
      * Once a player takes their turn, this variable is updated to the next player.
      */
     private Player currentPlayer;
@@ -113,7 +113,7 @@ public class Game {
 
     /**
      * Initializes a new game with two players and sets the current player to start their turn
-     *
+     * <p>
      * This method initializes and sets up the two players, sets the strategy for the AI player, creates the player components,
      * and selects a random player to start the game. It also sets the isInitialized variable to true to prevent duplicate
      * initialization.
@@ -170,7 +170,7 @@ public class Game {
 
     /**
      * Determines if the game is over.
-     *
+     * <p>
      * This method checks if the game is over by tracing the path of the current player and their opponent, and then checking
      * if the board is in final configuration or if there are no possible moves left for the current player's opponent.
      * Additionally, if the count of unchanged moves is greater than or equal to four, the game is considered over.
@@ -337,14 +337,6 @@ public class Game {
         return gamePaused;
     }
 
-    public void pauseGame() {
-        if (game.isGamePaused()) return;
-
-        game.setGamePaused(true);
-
-        PopUpCreator.createPopUp("Game Paused", "Game Paused");
-    }
-
     /**
      * Sets the paused state of the game.
      *
@@ -354,6 +346,13 @@ public class Game {
         this.gamePaused = gamePaused;
     }
 
+    public void pauseGame() {
+        if (game.isGamePaused()) return;
+
+        game.setGamePaused(true);
+
+        PopUpCreator.createPopUp("Game Paused", "Game Paused");
+    }
 
     public void stopGame() {
         game.setInitialized(false);

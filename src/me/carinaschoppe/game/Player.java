@@ -1,11 +1,11 @@
-package game;
+package me.carinaschoppe.game;
 
 
-import frontend.CellPanel;
-import frontend.PopUpCreator;
-import logic.MoveValidator;
-import utility.Component;
-import utility.Utility;
+import me.carinaschoppe.frontend.CellPanel;
+import me.carinaschoppe.frontend.PopUpCreator;
+import me.carinaschoppe.logic.MoveValidator;
+import me.carinaschoppe.utility.Component;
+import me.carinaschoppe.utility.Utility;
 
 import java.awt.*;
 
@@ -85,7 +85,7 @@ public class Player implements MoveValidator {
     /**
      * Method to make a move on a game board.
      *
-     * @param row The row of the cell to make a move on.
+     * @param row    The row of the cell to make a move on.
      * @param column The column of the cell to make a move on.
      * @throws IllegalArgumentException if the given row or column value is out of range or invalid.
      */
@@ -105,7 +105,7 @@ public class Player implements MoveValidator {
 
     /**
      * Method to end the current player's turn and switch to the next player.
-     *
+     * <p>
      * If a player has won the game or the game is currently paused, this method does nothing.
      * Otherwise, it switches to the next player and calls the startPlayersTurn method for the new player.
      */
@@ -155,7 +155,6 @@ public class Player implements MoveValidator {
             return false;
         }
         //check if the component is adjecent to my component
-        var adj = component.isAdjacent(panel);
-        return adj;
+        return component.isAdjacent(panel);
     }
 }

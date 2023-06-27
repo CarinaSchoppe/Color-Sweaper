@@ -1,10 +1,11 @@
-package frontend;
+package me.carinaschoppe.frontend;
 
-import game.Game;
-import game.Player;
-import listeners.SelectColorAction;
-import utility.Component;
-import utility.Utility;
+
+import me.carinaschoppe.game.Game;
+import me.carinaschoppe.game.Player;
+import me.carinaschoppe.listeners.SelectColorAction;
+import me.carinaschoppe.utility.Component;
+import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +65,6 @@ public class DisplayPanel extends JPanel {
     /**
      * Update the size of the board layout and populate it with cell panels.
      *
-     * @param none
      * @return void
      */
     private void updateBoardSize() {
@@ -82,7 +82,7 @@ public class DisplayPanel extends JPanel {
     /**
      * Returns a unique color for a specified cell panel based on its adjacent cell panels
      *
-     * @param row the row index of the cell panel
+     * @param row    the row index of the cell panel
      * @param column the column index of the cell panel
      * @return a Color object representing a unique color for the cell panel
      */
@@ -109,7 +109,6 @@ public class DisplayPanel extends JPanel {
     /**
      * Generates a new board with unique colors for each cell panel
      *
-     * @param none
      * @return void
      */
     public void generateRandomBoard() {
@@ -146,7 +145,6 @@ public class DisplayPanel extends JPanel {
      * Assign unique colors to the top right and bottom left cell panels
      * making sure that they have different colors
      *
-     * @param none
      * @return void
      */
     private void colorEdges() {
@@ -166,7 +164,7 @@ public class DisplayPanel extends JPanel {
     /**
      * Creates a Component object with the specified row and column.
      *
-     * @param row An integer representing the row number of the cell panel.
+     * @param row    An integer representing the row number of the cell panel.
      * @param column An integer representing the column number of the cell panel.
      * @return A Component object with the specified row and column.
      */
@@ -193,6 +191,7 @@ public class DisplayPanel extends JPanel {
 
     /**
      * Returns a list of adjacent cell panels to the given cell panel.
+     *
      * @param cell a CellPanel object representing the anchor cell.
      * @return an ArrayList of CellPanel objects representing adjacent cells.
      */
@@ -218,9 +217,9 @@ public class DisplayPanel extends JPanel {
 
 
     /**
-     * This method checks if all cells in the game board have been assigned a color. If not,  it returns false, otherwise true. 
+     * This method checks if all cells in the game board have been assigned a color. If not,  it returns false, otherwise true.
      *
-     * @return a boolean value that represents if all cells have been assigned a color or not. 
+     * @return a boolean value that represents if all cells have been assigned a color or not.
      */
     public boolean isFinalConfiguration() {
         //iterate over all Cell panels
@@ -258,8 +257,9 @@ public class DisplayPanel extends JPanel {
     }
 
     /**
-     * Sets the number of rows of the cell panels in the grid layout and calls the method for 
+     * Sets the number of rows of the cell panels in the grid layout and calls the method for
      * creating the cell panels.
+     *
      * @param rows the number of rows to set
      */
     public void setRows(int rows) {
@@ -290,7 +290,7 @@ public class DisplayPanel extends JPanel {
      * Creates the cell panels for the board.
      *
      * @param columns the number of columns of the board
-     * @param rows the number of rows of the board
+     * @param rows    the number of rows of the board
      */
     private void cellPanelsCreation(int columns, int rows) {
         cellPanels = new CellPanel[columns][rows];
@@ -305,7 +305,8 @@ public class DisplayPanel extends JPanel {
 
 
     /**
-     * Checks*/
+     * Checks
+     */
     //check if there is any possible move for the player
     public boolean noPossibleMove(Player player) {
         for (var cell : player.getComponent().adjacentCellsOfComponent()) {

@@ -1,12 +1,14 @@
+package me.carinaschoppe;
+
 /*
  * Siehe Hinweise auf dem Aufgabenblatt.
  */
 
-import frontend.GameWindow;
+import me.carinaschoppe.frontend.GameWindow;
 
 import javax.swing.*;
 
-public class StartMain {
+public class Start {
     //TODO: KI
     //TODO: TESTS
 

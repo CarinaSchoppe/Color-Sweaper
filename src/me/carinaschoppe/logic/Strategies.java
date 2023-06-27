@@ -1,4 +1,4 @@
-package logic;
+package me.carinaschoppe.logic;
 
 public enum Strategies {
 

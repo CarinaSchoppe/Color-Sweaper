@@ -1,3 +1,7 @@
+/*
+ * Copyright Notice for NiklasSuperProf Copyright (c) at Carina Sophie Schoppe 2023 File created on 6/27/23, 7:01 PM by Carina The Latest changes made by Carina on 6/27/23, 6:54 PM All contents of "Game" are protected by copyright. The copyright law, unless expressly indicated otherwise, is at Carina Sophie Schoppe. All rights reserved Any type of duplication, distribution, rental, sale, award, Public accessibility or other use requires the express written consent of Carina Sophie Schoppe.
+ */
+
 package me.carinaschoppe.game;
 
 import me.carinaschoppe.frontend.DisplayPanel;
@@ -136,7 +140,7 @@ public class Game {
         player2.setGame(this);
         player2.getComponent().tracePath();
         player1.getComponent().tracePath();
-        var currentPlayerName = GameWindow.getPlayerSelect().getSelectedItem().toString();
+        var currentPlayerName = Objects.requireNonNull(GameWindow.getPlayerSelect().getSelectedItem()).toString();
         currentPlayer = currentPlayerName.equals(player1.getName()) ? player1 : player2;
         currentPlayer.startPlayersTurn();
     }

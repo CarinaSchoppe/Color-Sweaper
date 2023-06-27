@@ -1,3 +1,7 @@
+/*
+ * Copyright Notice for NiklasSuperProf Copyright (c) at Carina Sophie Schoppe 2023 File created on 6/27/23, 7:01 PM by Carina The Latest changes made by Carina on 6/27/23, 6:56 PM All contents of "GameWindow" are protected by copyright. The copyright law, unless expressly indicated otherwise, is at Carina Sophie Schoppe. All rights reserved Any type of duplication, distribution, rental, sale, award, Public accessibility or other use requires the express written consent of Carina Sophie Schoppe.
+ */
+
 package me.carinaschoppe.frontend;
 
 
@@ -102,17 +106,6 @@ public class GameWindow {
      */
     private static JLabel player2Points;
 
-    /**
-     * Represents a string variable named "strategy" that specifies the strategy being used in the software.
-     * This variable is static, meaning it is a class-level variable and can be accessed without creating an instance of the class.
-     * Its visibility is private, so it can only be accessed within the class in which it is defined.
-     * Its data type is String, meaning it can hold alphanumeric characters and is immutable.
-     * Its initial value is null, so it must be assigned a value before it can be used.
-     * <p>
-     * Example:
-     * strategy = "Aggressive";
-     */
-    private static String strategy;
     /**
      * Represents the game status label on the user interface.
      * This variable holds a reference to a JLabel object which is used to display the current status of the game to the user.
@@ -229,7 +222,17 @@ public class GameWindow {
         //Add strategy select Dropdown to menuPanel
         var strategies = new String[]{Strategies.STAGNATION.getName(), Strategies.GREEDY.getName(), Strategies.MULTIPLAYER.getName()};
         strategySelect = new JComboBox<>(strategies);
-        strategy = (String) strategySelect.getSelectedItem();
+        /**
+         * Represents a string variable named "strategy" that specifies the strategy being used in the software.
+         * This variable is static, meaning it is a class-level variable and can be accessed without creating an instance of the class.
+         * Its visibility is private, so it can only be accessed within the class in which it is defined.
+         * Its data type is String, meaning it can hold alphanumeric characters and is immutable.
+         * Its initial value is null, so it must be assigned a value before it can be used.
+         * <p>
+         * Example:
+         * strategy = "Aggressive";
+         */
+        String strategy = (String) strategySelect.getSelectedItem();
         menuPanel.add(strategySelect);
         //Add Timer Label to menuPanel
         timerLabel = new JLabel("00:00");

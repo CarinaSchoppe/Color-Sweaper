@@ -125,8 +125,12 @@ public class Game {
         var topRight = Utility.getDisplayPanel().createComponent(Utility.getDisplayPanel().getRows() - 1, 0);
         var lowLeft = Utility.getDisplayPanel().createComponent(0, Utility.getDisplayPanel().getColumns() - 1);
         var strategy = Strategies.getMatchingName(Objects.requireNonNull(GameWindow.getStrategySelect().getSelectedItem()).toString());
-        this.player1 = new Player(lowLeft, "S1");
-        this.player2 = new AIPlayer(topRight, "S2", strategy);
+        this.player1 = new Player(lowLeft, "Spieler1");
+        if (strategy != Strategies.MULTIPLAYER)
+            this.player2 = new AIPlayer(topRight, "AI-Spieler2", strategy);
+        else
+            this.player2 = new Player(topRight, "Spieler2");
+
         //select a random player as the current player
         player1.setGame(this);
         player2.setGame(this);

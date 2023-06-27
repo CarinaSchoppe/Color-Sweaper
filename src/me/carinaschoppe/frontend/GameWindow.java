@@ -5,6 +5,7 @@ import me.carinaschoppe.game.Game;
 import me.carinaschoppe.listeners.KeyboardControlListener;
 import me.carinaschoppe.listeners.PlayPauseAction;
 import me.carinaschoppe.listeners.StartStopAction;
+import me.carinaschoppe.logic.Strategies;
 import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class GameWindow {
      * This variable represents the previous strategy used, as a string.
      * It is immutable and is initialized as "strategy1".
      */
-    private static final String stratPrev = "strategy1";
+    private static final String stratPrev = Strategies.STAGNATION.getName();
     /**
      * A static JButton instance representing a button used to start or stop an operation.
      */
@@ -176,7 +177,7 @@ public class GameWindow {
         menuPanel.add(playPauseButton);
 
         //Add game.Player select dropdown to menuPanel
-        var players = new String[]{"S1", "S2"};
+        var players = new String[]{"Spieler1", "Spieler2"};
         playerSelect = new JComboBox<>(players);
         menuPanel.add(playerSelect);
 
@@ -226,7 +227,7 @@ public class GameWindow {
         });
 
         //Add strategy select Dropdown to menuPanel
-        var strategies = new String[]{"Strategy01", "Strategy02", "Strategy03"};
+        var strategies = new String[]{Strategies.STAGNATION.getName(), Strategies.BLOCKING.getName(), Strategies.GREEDY.getName(), Strategies.MULTIPLAYER.getName()};
         strategySelect = new JComboBox<>(strategies);
         strategy = (String) strategySelect.getSelectedItem();
         menuPanel.add(strategySelect);

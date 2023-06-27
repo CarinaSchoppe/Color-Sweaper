@@ -2,9 +2,11 @@ package me.carinaschoppe.logic;
 
 public enum Strategies {
 
-    STAGNATION("strategy01"),
-    GREEDY("strategy02"),
-    BLOCKING("strategy03");
+    STAGNATION("Stagnation"),
+    GREEDY("Greedy"),
+    BLOCKING("Blocking"),
+
+    MULTIPLAYER("Multiplayer");
 
     private final String name;
 

@@ -68,6 +68,7 @@ public class AIPlayer extends Player implements Strategy {
             case GREEDY -> greedyStrategy();
             case BLOCKING -> blockingStrategy();
             case STAGNATION -> stagnationStrategy();
+            default -> throw new IllegalStateException("Unexpected value: " + strategy);
         };
         makeMove(positions[0], positions[1]);
     }

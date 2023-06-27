@@ -14,7 +14,7 @@ public enum Strategies {
 
     public static Strategies getMatchingName(String name) {
         for (var strategy : Strategies.values()) {
-            if (strategy.getName().equals(name)) {
+            if (strategy.getName().equalsIgnoreCase(name)) {
                 return strategy;
             }
         }

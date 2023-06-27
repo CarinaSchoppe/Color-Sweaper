@@ -52,4 +52,13 @@ public class CellPanel extends JPanel {
     public HashSet<CellPanel> getAdjacentCells(CellPanel panel) {
         return new HashSet<>(Utility.getDisplayPanel().getNeighbors(panel));
     }
+
+    @Override
+    public String toString() {
+        return "CellPanel{" +
+                "row=" + row +
+                ", column=" + column +
+                ", color=" + color +
+                '}';
+    }
 }

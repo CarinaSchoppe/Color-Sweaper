@@ -65,6 +65,7 @@ public class Game {
 
 
     private Player getWinner() {
+
         if (player1.getComponent().getCells().size() > player2.getComponent().getCells().size()) {
             return player1;
         } else if (player1.getComponent().getCells().size() < player2.getComponent().getCells().size()) {
@@ -89,11 +90,12 @@ public class Game {
     }
 
     private boolean isGameOver() {
+        currentPlayer.getComponent().tracePath();
+        getOpponent(currentPlayer).getComponent().tracePath();
         //Check if the board is in final configuration
         if (displayPanel.isFinalConfiguration()) {
             return true;
         }
-
         if (displayPanel.noPossibleMove(getOpponent(currentPlayer))) {
             return true;
         }

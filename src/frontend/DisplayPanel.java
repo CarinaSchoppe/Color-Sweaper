@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class DisplayPanel extends JPanel {
     private CellPanel[][] cellPanels;
@@ -205,11 +204,10 @@ public class DisplayPanel extends JPanel {
 
     //check if there is any possible move for the player
     public boolean noPossibleMove(Player player) {
-        var adjacentCells = new HashSet<CellPanel>();
-        for (var cell : player.getComponent().getCells()) {
-            var neighbors = getNeighbors(cell).stream().filter(cellPanel -> cellPanel.getBackground() != player.getColor() && cellPanel.getBackground() != Game.getGame().getOpponent(player).getColor()).collect(Collectors.toSet());
-            adjacentCells.addAll(neighbors);
+        for (var cell : player.getComponent().adjacentCellsOfComponent()) {
+            if (player.validateMove(cell))
+                return false;
         }
-        return adjacentCells.isEmpty();
+        return true;
     }
 }

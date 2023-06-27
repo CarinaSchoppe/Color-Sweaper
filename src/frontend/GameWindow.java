@@ -1,11 +1,9 @@
 package frontend;
 
-import game.AIPlayer;
 import game.Game;
 import listeners.KeyboardControlListener;
 import listeners.PlayPauseAction;
 import listeners.StartStopAction;
-import logic.Strategies;
 import utility.Utility;
 
 import javax.swing.*;
@@ -22,12 +20,25 @@ public class GameWindow {
     private static int colPrev = 0;
     private static int coluPrev = 0;
     private static int rowPrev = 0;
+
+    private static final String stratPrev = "strategy1";
     private static JComboBox<String> strategySelect;
     private static JLabel timerLabel;
+
+    private static JLabel player1Points;
+    private static JLabel player2Points; 
 
     private static String strategy;
     private static JLabel gameStatus;
 
+    /**
+     * This method creates and shows the GUI for the game window. It sets the size and minimum size for the window,
+     * creates a menu panel, adds various buttons and drop down menus to it, creates a display panel and color panel,
+     * and adds them to different parts of the window. It also creates a timer and sets up key mappings to listen for
+     * input from the user.
+     * <p>
+     * This method does not return anything.
+     */
     public static void createAndShowGUI() {
         var frame = new JFrame("Start");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +53,6 @@ public class GameWindow {
 
             frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(numpadKey), numpadKey);
             frame.getRootPane().getActionMap().put(numpadKey, new KeyboardControlListener());
-
         }
 
         //Set Minimum Size
@@ -127,19 +137,14 @@ public class GameWindow {
         var strategies = new String[]{"Strategy01", "Strategy02", "Strategy03"};
         strategySelect = new JComboBox<>(strategies);
         strategy = (String) strategySelect.getSelectedItem();
-        strategySelect.addActionListener(e -> {
-            if (Game.getGame().isGameRunning()) {
-                strategySelect.setSelectedItem(strategy);
-                return;
-            }
-            strategy = (String) strategySelect.getSelectedItem();
-            ((AIPlayer) Game.getGame().getPlayer2()).setStrategy(Strategies.getMatchingName(strategy));
-        });
         menuPanel.add(strategySelect);
-
         //Add Timer Label to menuPanel
         timerLabel = new JLabel("00:00");
+        player2Points = new JLabel("Player2: 0");
+        player1Points = new JLabel("Player1: 0");
         menuPanel.add(timerLabel);
+        menuPanel.add(player1Points);
+        menuPanel.add(player2Points);
 
         //Create display Panel
         Utility.setDisplayPanel(new DisplayPanel((Integer) rowSpinner.getValue(), (Integer) columnSpinner.getValue()));
@@ -211,4 +216,19 @@ public class GameWindow {
         return gameStatus;
     }
 
+    public static JLabel getPlayer1Points() {
+        return player1Points;
+    }
+
+    public static void setPlayer1Points(JLabel player1Points) {
+        GameWindow.player1Points = player1Points;
+    }
+
+    public static JLabel getPlayer2Points() {
+        return player2Points;
+    }
+
+    public static void setPlayer2Points(JLabel player2Points) {
+        GameWindow.player2Points = player2Points;
+    }
 }

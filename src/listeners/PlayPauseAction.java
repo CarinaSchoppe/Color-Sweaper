@@ -23,9 +23,8 @@ public class PlayPauseAction implements ActionListener {
                 PopUpCreator.createPopUp("Game Resumed", "Game Resumed");
                 Game.getGame().getCurrentPlayer().startPlayersTurn();
             }
-
+            //initializes the game
             Game.getGame().initialize();
-
             GameWindow.getPlayPauseButton().setText("Pause");
         } else {
             GameWindow.getPlayPauseButton().setText("Play");

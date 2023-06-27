@@ -9,6 +9,11 @@ import java.awt.event.MouseEvent;
 
 public class SelectColorAction extends MouseAdapter {
 
+    /**
+     * Responds to a mouse click event on the given CellPanel, registering a move made by the current player
+     *
+     * @param e the MouseEvent triggered by clicking on the CellPanel
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         //clicked on appropiate panel

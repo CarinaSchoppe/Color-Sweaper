@@ -10,6 +10,13 @@ import java.awt.event.ActionListener;
 public class StartStopAction implements ActionListener {
 
 
+    /**
+     * Handles the action event of the start/stop button in the GUI. If the game is paused,
+     * it either resets the board and settings if the game is already running or generates
+     * a new random board and disables player and color selection if it is not running.
+     *
+     * @param e the ActionEvent triggered by the start/stop button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!Game.getGame().isGamePaused()) return;

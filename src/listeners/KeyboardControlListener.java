@@ -10,6 +10,13 @@ import java.awt.event.ActionEvent;
 
 public class KeyboardControlListener extends AbstractAction {
 
+    /**
+     * Method to handle the action performed by the user.
+     * This method is called automatically when a certain action is performed by the user,
+     * and the corresponding event is triggered.
+     *
+     * @param e Action event occurred
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         var number = Integer.parseInt(e.getActionCommand());

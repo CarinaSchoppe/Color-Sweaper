@@ -9,61 +9,176 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class Utility {
+    /**
+     * An array of predefined colors.
+     * This array contains the following colors:
+     * Red, Green, Blue, Yellow, Black, Orange, Pink, Magenta, Cyan.
+     */
     public static final Color[] COLORS = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.BLACK, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.CYAN};
+    /**
+     * A static final instance of the {@link Random} class, used for generating
+     * random numbers.
+     */
+    private static final Random random = new Random();
+    /**
+     * A private static variable that represents a color panel.
+     * The color panel is used to display and manipulate colors in a graphical user interface.
+     * This variable is accessible only within the class it is declared in and can be used to
+     * update or retrieve the current color panel as needed.
+     */
     private static ColorPanel colorPanel;
+    /**
+     * The selectedColors variable represents an array of colors that have been selected.
+     * This variable is declared as private static, meaning that it is accessible within the class only.
+     * The type of each element in the array is Color.
+     */
     private static Color[] selectedColors;
+    /**
+     * A static variable representing a timer object.
+     * <p>
+     * This variable can be used to schedule and cancel scheduled tasks. It is shared among all instances of the class
+     * and can be accessed from any method of the class.
+     * </p>
+     * <p>
+     * The Timer class allows to schedule tasks to be executed after a certain delay, or to execute them repeatedly with a fixed delay
+     * between executions. The timer can be cancelled at any time, and the scheduled tasks will not be executed anymore.
+     * </p>
+     */
     private static Timer timer;
+    /**
+     * The timerSeconds variable represents the number of seconds for a timer.
+     * It is a private static integer variable which can only be accessed within the class it is declared in.
+     * <p>
+     * The value of timerSeconds can be set and retrieved using respective setter and getter methods.
+     */
     private static int timerSeconds;
+    /**
+     * Represents a private static class-level variable, which holds an instance of DisplayPanel.
+     *
+     * <p> DisplayPanel is a UI component which renders content on the screen. This variable holds an 
+     * instance of DisplayPanel, which can be used by other classes to manage and update the displayed content.</p>
+     *
+     * <p>This variable is marked as private and static which means that it can be accessed only within the class where it is 
+     * declared, and it will hold the same value for all instances of the class.</p>
+     *
+     * @see DisplayPanel
+     */
     private static DisplayPanel displayPanel;
 
+    /**
+     * Returns a randomly generated java.awt.Color object.
+     *
+     * @return a randomly generated java.awt.Color object
+     */
     public static java.awt.Color generateRandomColor() {
         return selectedColors[random.nextInt(selectedColors.length)];
     }
 
+    /**
+     * Returns the singleton instance of ColorPanel.
+     *
+     * @return the ColorPanel instance.
+     */
     public static ColorPanel getColorPanel() {
         return colorPanel;
     }
 
+    /**
+     * Sets the color panel used for displaying colors in the application.
+     *
+     * @param colorPanel the color panel to set
+     */
     public static void setColorPanel(ColorPanel colorPanel) {
         Utility.colorPanel = colorPanel;
     }
 
+    /**
+     * Returns an array of Colors that have been selected.
+     *
+     * @return an array of Color objects that have been selected.
+     */
     public static Color[] getSelectedColors() {
         return selectedColors;
     }
 
+    /**
+     * Sets the selected colors for the application.
+     *
+     * @param selectedColors an array of Color objects representing the selected colors
+     */
     public static void setSelectedColors(Color[] selectedColors) {
         Utility.selectedColors = selectedColors;
     }
 
+    /**
+     * Returns the Timer instance. The Timer instance is a static variable that is shared across the application.
+     *
+     * @return the Timer instance
+     */
     public static Timer getTimer() {
         return timer;
     }
 
+    /**
+     * This method sets the timer for Utility class.
+     *
+     * @param timer the Timer object to be set
+     */
     public static void setTimer(Timer timer) {
         Utility.timer = timer;
     }
 
+    /**
+     * Returns the timerSeconds value which indicates the number of seconds elapsed in the timer.
+     *
+     * @return an integer value representing the current number of seconds elapsed in the timer.
+     */
     public static int getTimerSeconds() {
         return timerSeconds;
     }
 
+    /**
+     * Sets the timer duration in seconds.
+     *
+     * @param timerSeconds the number of seconds for the timer duration
+     */
     public static void setTimerSeconds(int timerSeconds) {
         Utility.timerSeconds = timerSeconds;
     }
 
+    /**
+     * Returns the display panel that holds the user interface components.
+     *
+     * @return DisplayPanel object that contains the main UI components.
+     */
     public static DisplayPanel getDisplayPanel() {
         return displayPanel;
     }
 
-    public static java.awt.Color randomColor() {
-        return Utility.getSelectedColors()[random.nextInt(Utility.getSelectedColors().length)];
-    }
+    /**
+     * Sets the DisplayPanel object to be used by the Utility class.
+     *
+     * @param displayPanel the DisplayPanel object to be set
+     */
     public static void setDisplayPanel(DisplayPanel displayPanel) {
         Utility.displayPanel = displayPanel;
     }
 
-    private static final Random random = new Random();
+    /**
+     * This method returns a randomly selected color from the pre-defined set of colors.
+     *
+     * @return a randomly selected Color object 
+     **/
+    public static java.awt.Color randomColor() {
+        return Utility.getSelectedColors()[random.nextInt(Utility.getSelectedColors().length)];
+    }
+
+    /**
+     * Generates an array of random colors.
+     *
+     * @param colorCount the number of random colors to generate
+     * @return an array of random colors
+     */
     public static Color[] getRandomColors(int colorCount) {
         var randomColors = new HashSet<Color>();
 

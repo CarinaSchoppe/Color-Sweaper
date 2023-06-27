@@ -9,30 +9,82 @@ import utility.Utility;
 import java.util.Objects;
 
 public class Game {
-    private Player player1;
-    private Player player2;
-    private DisplayPanel displayPanel;
-    private int unchangedMovesCount;
-    private boolean isInitialized;
-
+    /**
+     * The "game" variable holds a reference to an instance of the Game class. It is declared as private
+     * and static to limit its visibility to the containing class, and to allow access to it from static
+     * methods within the class.
+     *
+     * The Game class is responsible for managing the game state, running the game loop, and rendering the
+     * game graphics. By keeping a reference to a single instance of the Game class in the "game" variable,
+     * we can ensure that there is only one active game instance running at any given time.
+     *
+     * This variable should be used with caution, as it can be easily manipulated by other parts of the code
+     * if not properly protected. It is recommended to use the public methods provided by the Game class to
+     * interact with the game state and avoid direct manipulation of the "game" variable.
+     */
     private static Game game;
-
+    /**
+     * Represents the first player of the game.
+     */
+    private Player player1;
+    /**
+     * Represents the second player in a game.
+     */
+    private Player player2;
+    /**
+     * The display panel used to show the content to the user.
+     */
+    private DisplayPanel displayPanel;
+    /**
+     * The unchangedMovesCount variable stores the number of consecutive moves that have been made without changing the state of the game board.
+     * This variable is used in various strategies that depend on making moves that result in a change in the board state, such as detecting a stuck state.
+     */
+    private int unchangedMovesCount;
+    /**
+     * Represents the initialization state of a variable.
+     * <p>
+     * The boolean value of this variable indicates whether an object has been initialized.
+     * A value of true indicates that the object has been initialized,
+     * while a value of false indicates that the object is still uninitialized.
+     */
+    private boolean isInitialized;
+    /**
+     * Represents the current state of the game.
+     * If the game is running, this value is set to true; otherwise, it is set to false.
+     */
     private boolean gameRunning;
+    /**
+     * Represents whether the game is currently paused or not.
+     * If the value is true, the game is paused. 
+     * If the value is false, the game is currently running.
+     */
     private boolean gamePaused = true;
+    /**
+     * Holds the current player of the game.
+     *
+     * This variable is used to keep track of which player's turn it is in the game.
+     * It is of type Player, which represents a player of the game. 
+     * Once a player takes their turn, this variable is updated to the next player.
+     */
     private Player currentPlayer;
 
 
+    /**
+     * Constructs a new Game with the given display panel
+     *
+     * @param displayPanel the display panel to use for the game
+     */
     public Game(DisplayPanel displayPanel) {
         this.displayPanel = displayPanel;
         this.unchangedMovesCount = 0;
         game = this;
     }
 
-    public Player getOpponent(Player player) {
-        return player == player1 ? player2 : player1;
-    }
-
-
+    /**
+     * Returns an instance of the Game class. If the instance does not exist, a new instance is created.
+     *
+     * @return an instance of the Game class
+     */
     public static Game getGame() {
         if (game == null) {
             game = new Game(Utility.getDisplayPanel());
@@ -40,10 +92,32 @@ public class Game {
         return game;
     }
 
+    /**
+     * Sets the current game instance to the provided game object
+     *
+     * @param game an instance of the Game class that represents the current game being played
+     */
     public static void setGame(Game game) {
         Game.game = game;
     }
 
+    /**
+     * Returns the opponent of the given player
+     *
+     * @param player the player whose opponent is to be returned
+     * @return the opponent of the given player
+     */
+    public Player getOpponent(Player player) {
+        return player == player1 ? player2 : player1;
+    }
+
+    /**
+     * Initializes a new game with two players and sets the current player to start their turn
+     *
+     * This method initializes and sets up the two players, sets the strategy for the AI player, creates the player components,
+     * and selects a random player to start the game. It also sets the isInitialized variable to true to prevent duplicate
+     * initialization.
+     */
     public void initialize() {
 
         if (isInitialized) return;
@@ -75,6 +149,11 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the game has ended and creates a PopUp window displaying the winner or a draw message
+     *
+     * @return a boolean value indicating whether the game has ended or not
+     */
     public boolean checkWinning() {
         if (isGameOver()) {
             var winner = getWinner();
@@ -89,6 +168,15 @@ public class Game {
         return false;
     }
 
+    /**
+     * Determines if the game is over.
+     *
+     * This method checks if the game is over by tracing the path of the current player and their opponent, and then checking
+     * if the board is in final configuration or if there are no possible moves left for the current player's opponent.
+     * Additionally, if the count of unchanged moves is greater than or equal to four, the game is considered over.
+     *
+     * @return true if the game is over, false otherwise
+     */
     private boolean isGameOver() {
         currentPlayer.getComponent().tracePath();
         getOpponent(currentPlayer).getComponent().tracePath();
@@ -104,69 +192,149 @@ public class Game {
     }
 
 
+    /**
+     * Returns an instance of the Player class representing player 1.
+     *
+     * @return instance of Player representing player 1
+     */
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * Sets the first player for the game.
+     *
+     * @param player1 the Player object representing the first player of the game
+     */
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
 
+    /**
+     * Returns the player 2 object.
+     *
+     * @return the player 2 object
+     */
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * Set the Player 2 object in the game.
+     *
+     * @param player2 The Player object representing the second player in the game.
+     */
     public void setPlayer2(Player player2) {
         this.player2 = player2;
     }
 
+    /**
+     * Switches the current player to his/her opponent
+     *
+     * @param player the current player to switch from
+     */
     public void switchCurrentPlayers(Player player) {
         currentPlayer = getOpponent(player);
     }
 
 
+    /**
+     * Retrieves the DisplayPanel object that represents the main UI panel for this application.
+     *
+     * @return The DisplayPanel object for this application.
+     */
     public DisplayPanel getDisplayPanel() {
         return displayPanel;
     }
 
+    /**
+     * Sets the display panel for this object.
+     *
+     * @param displayPanel The panel to be set as the new display panel.
+     */
     public void setDisplayPanel(DisplayPanel displayPanel) {
         this.displayPanel = displayPanel;
     }
 
+    /**
+     * Returns the count of unchanged moves.
+     *
+     * @return the count of unchanged moves
+     */
     public int getUnchangedMovesCount() {
         return unchangedMovesCount;
     }
 
+    /**
+     * Sets the number of unchanged moves made by the player during the game.
+     *
+     * @param unchangedMovesCount the number of unchanged moves made by the player
+     */
+    public void setUnchangedMovesCount(int unchangedMovesCount) {
+        this.unchangedMovesCount = unchangedMovesCount;
+    }
+
+    /**
+     * Retrieves the current player object.
+     *
+     * @return the current player object
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Sets the current player.
+     *
+     * @param currentPlayer the new current player to be set. Must not be null.
+     */
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Returns a boolean indicating whether the game is currently running or not.
+     *
+     * @return true if the game is running, false otherwise.
+     */
     public boolean isGameRunning() {
         return gameRunning;
     }
 
+    /**
+     * Sets the state of the game to running or not running.
+     *
+     * @param gameRunning if true, the game is set to running, if false, the game is not running.
+     */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
     }
 
+    /**
+     * Returns whether the object has been initialized or not.
+     *
+     * @return {@code true} if the object has been initialized; {@code false} otherwise
+     */
     public boolean isInitialized() {
         return isInitialized;
     }
 
+    /**
+     * Sets the value of the isInitialized flag.
+     *
+     * @param initialized the boolean value to be set for the isInitialized flag
+     */
     public void setInitialized(boolean initialized) {
         isInitialized = initialized;
     }
 
+    /**
+     * This method checks if the game is currently paused or not.
+     *
+     * @return true if the game is paused, false otherwise
+     */
     public boolean isGamePaused() {
         return gamePaused;
-    }
-
-    public void setGamePaused(boolean gamePaused) {
-        this.gamePaused = gamePaused;
     }
 
     public void pauseGame() {
@@ -177,9 +345,13 @@ public class Game {
         PopUpCreator.createPopUp("Game Paused", "Game Paused");
     }
 
-
-    public void setUnchangedMovesCount(int unchangedMovesCount) {
-        this.unchangedMovesCount = unchangedMovesCount;
+    /**
+     * Sets the paused state of the game.
+     *
+     * @param gamePaused a boolean value indicating whether the game is paused or not
+     */
+    public void setGamePaused(boolean gamePaused) {
+        this.gamePaused = gamePaused;
     }
 
 

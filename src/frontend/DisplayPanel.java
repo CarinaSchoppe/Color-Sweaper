@@ -14,10 +14,27 @@ import java.util.List;
 import java.util.Set;
 
 public class DisplayPanel extends JPanel {
+    /**
+     * A 2D array of CellPanels representing a grid of panels in a graphical user interface.
+     * Each CellPanel represents a single panel on the grid.
+     */
     private CellPanel[][] cellPanels;
+    /**
+     * This variable represents the number of rows in a given data structure.
+     */
     private int rows;
+    /**
+     * The number of columns in a grid or table.
+     */
     private int columns;
 
+    /**
+     * Constructs a new DisplayPanel object with a specified number of rows and columns
+     *
+     * @param rows    - the number of rows in the DisplayPanel
+     * @param columns - the number of columns in the DisplayPanel
+     * @return void
+     */
     public DisplayPanel(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -28,6 +45,11 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    /**
+     * Creates a clone of the cellPanels 2D array and its contents
+     *
+     * @return A new 2D array of CellPanel objects with identical colors, rows, and columns as the original
+     */
     public CellPanel[][] cloneCellPanels() {
         //create a clone of that cellPanels and there objects
         CellPanel[][] clone = new CellPanel[columns][rows];
@@ -39,6 +61,12 @@ public class DisplayPanel extends JPanel {
         return clone;
     }
 
+    /**
+     * Update the size of the board layout and populate it with cell panels.
+     *
+     * @param none
+     * @return void
+     */
     private void updateBoardSize() {
         setLayout(new GridLayout(columns, rows));
         removeAll();
@@ -51,6 +79,13 @@ public class DisplayPanel extends JPanel {
         repaint();
     }
 
+    /**
+     * Returns a unique color for a specified cell panel based on its adjacent cell panels
+     *
+     * @param row the row index of the cell panel
+     * @param column the column index of the cell panel
+     * @return a Color object representing a unique color for the cell panel
+     */
     public Color getUniqueColor(int row, int column) {
         Set<Color> adjacentColors = new HashSet<>();
         // Überprüfe die umliegenden Zellen und füge ihre Farben zum Set hinzu
@@ -71,6 +106,12 @@ public class DisplayPanel extends JPanel {
         return newColor;
     }
 
+    /**
+     * Generates a new board with unique colors for each cell panel
+     *
+     * @param none
+     * @return void
+     */
     public void generateRandomBoard() {
         this.removeAll();
         Color previousColor = null;
@@ -101,6 +142,13 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    /**
+     * Assign unique colors to the top right and bottom left cell panels
+     * making sure that they have different colors
+     *
+     * @param none
+     * @return void
+     */
     private void colorEdges() {
         var topRight = cellPanels[0][rows - 1];
         var bottomLeft = cellPanels[columns - 1][0];
@@ -115,12 +163,24 @@ public class DisplayPanel extends JPanel {
 
     }
 
+    /**
+     * Creates a Component object with the specified row and column.
+     *
+     * @param row An integer representing the row number of the cell panel.
+     * @param column An integer representing the column number of the cell panel.
+     * @return A Component object with the specified row and column.
+     */
     public Component createComponent(int row, int column) {
         var component = new Component();
         component.addCell(cellPanels[column][row]);
         return component;
     }
 
+    /**
+     * Clears the game board of all background colors and borders.
+     * Goes through every cell in the game board and sets their background
+     * color and border to null. This resets the game board for a new game.
+     */
     public void clearBoard() {
         for (int row = 0; row < this.rows; row++) {
             for (int column = 0; column < this.columns; column++) {
@@ -131,6 +191,11 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    /**
+     * Returns a list of adjacent cell panels to the given cell panel.
+     * @param cell a CellPanel object representing the anchor cell.
+     * @return an ArrayList of CellPanel objects representing adjacent cells.
+     */
     public List<CellPanel> getNeighbors(CellPanel cell) {
         var neighbors = new ArrayList<CellPanel>();
         var up = cell.getColumn() - 1;
@@ -152,6 +217,11 @@ public class DisplayPanel extends JPanel {
     //Check uf there is a path between start and end panel
 
 
+    /**
+     * This method checks if all cells in the game board have been assigned a color. If not,  it returns false, otherwise true. 
+     *
+     * @return a boolean value that represents if all cells have been assigned a color or not. 
+     */
     public boolean isFinalConfiguration() {
         //iterate over all Cell panels
         for (var column = 0; column < rows; column++) {
@@ -167,29 +237,61 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    /**
+     * Returns a 2D array of CellPanels representing the game board.
+     * Each CellPanel represents a single cell on the board.
+     *
+     * @return a 2D array of CellPanels
+     */
     public CellPanel[][] getCellPanels() {
         return cellPanels;
     }
 
 
+    /**
+     * Returns the number of rows in the data set.
+     *
+     * @return the number of rows in the data set
+     */
     public int getRows() {
         return rows;
     }
 
+    /**
+     * Sets the number of rows of the cell panels in the grid layout and calls the method for 
+     * creating the cell panels.
+     * @param rows the number of rows to set
+     */
     public void setRows(int rows) {
         this.rows = rows;
         cellPanelsCreation(columns, rows);
     }
 
+    /**
+     * Retrieves the number of columns in the data structure.
+     *
+     * @return the number of columns
+     */
     public int getColumns() {
         return columns;
     }
 
+    /**
+     * Sets the number of columns of the grid and updates the layout of the cell panels accordingly.
+     *
+     * @param columns the new number of columns in the grid.
+     */
     public void setColumns(int columns) {
         this.columns = columns;
         cellPanelsCreation(columns, rows);
     }
 
+    /**
+     * Creates the cell panels for the board.
+     *
+     * @param columns the number of columns of the board
+     * @param rows the number of rows of the board
+     */
     private void cellPanelsCreation(int columns, int rows) {
         cellPanels = new CellPanel[columns][rows];
         for (var column = 0; column < columns; column++) {
@@ -202,6 +304,8 @@ public class DisplayPanel extends JPanel {
     }
 
 
+    /**
+     * Checks*/
     //check if there is any possible move for the player
     public boolean noPossibleMove(Player player) {
         for (var cell : player.getComponent().adjacentCellsOfComponent()) {

@@ -132,10 +132,7 @@ public class AIPlayer extends Player implements Strategy {
      *
      * @return An integer array representing the blocking strategy.
      */
-    @Override
-    public int[] blockingStrategy() {
-        return new int[0];
-    }
+
 
     /**
      * Implements a stagnation strategy for AI players in a game. The method calculates the moves available to the

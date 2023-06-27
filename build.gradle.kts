@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:+'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:+'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:+")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:+")
     implementation("org.jetbrains:annotations:+")
     implementation("org.projectlombok:lombok:+")
     annotationProcessor("org.projectlombok:lombok:+")

@@ -5,6 +5,7 @@
 package me.carinaschoppe.game;
 
 
+import lombok.Getter;
 import me.carinaschoppe.frontend.CellPanel;
 import me.carinaschoppe.frontend.PopUpCreator;
 import me.carinaschoppe.logic.MoveValidator;
@@ -17,16 +18,36 @@ public class Player implements MoveValidator {
     /**
      * Represents a final Component instance that holds a visual element of the user interface.
      * This variable is immutable and can only be set once upon initialization.
+     * -- GETTER --
+     *  Returns the component object of the game board.
+     *  This method returns the component object which is a graphical representation of the game board.
+     *  The component object is used to display and update game information displayed on the user interface.
+     *
+     * @return A Component object representing the game board.
+
      */
+    @Getter
     private final Component component;
     /**
      * A string representation of a name that is immutable.
+     * -- GETTER --
+     *  Returns the name of the object.
+     *
+     * @return The name of the object as a String.
+
      */
+    @Getter
     private final String name;
     /**
      * The color variable represents the color of an object.
      * The color is defined using the RGB color model and is represented in the software as an instance of the java.awt.Color class.
+     * -- GETTER --
+     *  Method to retrieve the Color value of an object.
+     *
+     * @return The Color value associated with the object.
+
      */
+    @Getter
     private Color color;
     /**
      * This variable represents an instance of the Game class, which handles the main game logic and provides access to game state and game settings.
@@ -48,42 +69,12 @@ public class Player implements MoveValidator {
 
 
     /**
-     * Returns the component object of the game board.
-     * This method returns the component object which is a graphical representation of the game board.
-     * The component object is used to display and update game information displayed on the user interface.
-     *
-     * @return A Component object representing the game board.
-     */
-    public Component getComponent() {
-        return component;
-    }
-
-
-    /**
-     * Method to retrieve the Color value of an object.
-     *
-     * @return The Color value associated with the object.
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    /**
      * Sets the color of an object.
      *
      * @param color The color to be set for the object.
      */
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    /**
-     * Returns the name of the object.
-     *
-     * @return The name of the object as a String.
-     */
-    public String getName() {
-        return name;
     }
 
     /**

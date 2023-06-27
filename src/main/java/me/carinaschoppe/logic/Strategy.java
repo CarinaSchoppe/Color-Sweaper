@@ -12,7 +12,6 @@ public interface Strategy {
      */
     int[] greedyStrategy();
 
-  
     /**
      * Computes the stagnation strategy for a given task.
      * The method calculates how long a task can remain inactive before considering it as "stagnant".

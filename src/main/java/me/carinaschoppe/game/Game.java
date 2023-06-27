@@ -4,6 +4,7 @@
 
 package me.carinaschoppe.game;
 
+import lombok.Getter;
 import me.carinaschoppe.frontend.DisplayPanel;
 import me.carinaschoppe.frontend.GameWindow;
 import me.carinaschoppe.frontend.PopUpCreator;
@@ -29,20 +30,44 @@ public class Game {
     private static Game game;
     /**
      * Represents the first player of the game.
+     * -- GETTER --
+     *  Returns an instance of the Player class representing player 1.
+     *
+     * @return instance of Player representing player 1
+
      */
+    @Getter
     private Player player1;
     /**
      * Represents the second player in a game.
+     * -- GETTER --
+     *  Returns the player 2 object.
+     *
+     * @return the player 2 object
+
      */
+    @Getter
     private Player player2;
     /**
      * The display panel used to show the content to the user.
+     * -- GETTER --
+     *  Retrieves the DisplayPanel object that represents the main UI panel for this application.
+     *
+     * @return The DisplayPanel object for this application.
+
      */
+    @Getter
     private DisplayPanel displayPanel;
     /**
      * The unchangedMovesCount variable stores the number of consecutive moves that have been made without changing the state of the game board.
      * This variable is used in various strategies that depend on making moves that result in a change in the board state, such as detecting a stuck state.
+     * -- GETTER --
+     *  Returns the count of unchanged moves.
+     *
+     * @return the count of unchanged moves
+
      */
+    @Getter
     private int unchangedMovesCount;
     /**
      * Represents the initialization state of a variable.
@@ -55,13 +80,25 @@ public class Game {
     /**
      * Represents the current state of the game.
      * If the game is running, this value is set to true; otherwise, it is set to false.
+     * -- GETTER --
+     *  Returns a boolean indicating whether the game is currently running or not.
+     *
+     * @return true if the game is running, false otherwise.
+
      */
+    @Getter
     private boolean gameRunning;
     /**
      * Represents whether the game is currently paused or not.
      * If the value is true, the game is paused.
      * If the value is false, the game is currently running.
+     * -- GETTER --
+     *  This method checks if the game is currently paused or not.
+     *
+     * @return true if the game is paused, false otherwise
+
      */
+    @Getter
     private boolean gamePaused = true;
     /**
      * Holds the current player of the game.
@@ -69,7 +106,13 @@ public class Game {
      * This variable is used to keep track of which player's turn it is in the game.
      * It is of type Player, which represents a player of the game.
      * Once a player takes their turn, this variable is updated to the next player.
+     * -- GETTER --
+     *  Retrieves the current player object.
+     *
+     * @return the current player object
+
      */
+    @Getter
     private Player currentPlayer;
 
 
@@ -201,30 +244,12 @@ public class Game {
 
 
     /**
-     * Returns an instance of the Player class representing player 1.
-     *
-     * @return instance of Player representing player 1
-     */
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    /**
      * Sets the first player for the game.
      *
      * @param player1 the Player object representing the first player of the game
      */
     public void setPlayer1(Player player1) {
         this.player1 = player1;
-    }
-
-    /**
-     * Returns the player 2 object.
-     *
-     * @return the player 2 object
-     */
-    public Player getPlayer2() {
-        return player2;
     }
 
     /**
@@ -247,30 +272,12 @@ public class Game {
 
 
     /**
-     * Retrieves the DisplayPanel object that represents the main UI panel for this application.
-     *
-     * @return The DisplayPanel object for this application.
-     */
-    public DisplayPanel getDisplayPanel() {
-        return displayPanel;
-    }
-
-    /**
      * Sets the display panel for this object.
      *
      * @param displayPanel The panel to be set as the new display panel.
      */
     public void setDisplayPanel(DisplayPanel displayPanel) {
         this.displayPanel = displayPanel;
-    }
-
-    /**
-     * Returns the count of unchanged moves.
-     *
-     * @return the count of unchanged moves
-     */
-    public int getUnchangedMovesCount() {
-        return unchangedMovesCount;
     }
 
     /**
@@ -283,30 +290,12 @@ public class Game {
     }
 
     /**
-     * Retrieves the current player object.
-     *
-     * @return the current player object
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    /**
      * Sets the current player.
      *
      * @param currentPlayer the new current player to be set. Must not be null.
      */
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-    }
-
-    /**
-     * Returns a boolean indicating whether the game is currently running or not.
-     *
-     * @return true if the game is running, false otherwise.
-     */
-    public boolean isGameRunning() {
-        return gameRunning;
     }
 
     /**
@@ -334,15 +323,6 @@ public class Game {
      */
     public void setInitialized(boolean initialized) {
         isInitialized = initialized;
-    }
-
-    /**
-     * This method checks if the game is currently paused or not.
-     *
-     * @return true if the game is paused, false otherwise
-     */
-    public boolean isGamePaused() {
-        return gamePaused;
     }
 
     /**

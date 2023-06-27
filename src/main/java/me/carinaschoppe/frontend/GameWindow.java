@@ -5,6 +5,7 @@
 package me.carinaschoppe.frontend;
 
 
+import lombok.Getter;
 import me.carinaschoppe.game.Game;
 import me.carinaschoppe.listeners.KeyboardControlListener;
 import me.carinaschoppe.listeners.PlayPauseAction;
@@ -23,23 +24,55 @@ public class GameWindow {
     private static final String stratPrev = Strategies.STAGNATION.getName();
     /**
      * A static JButton instance representing a button used to start or stop an operation.
+     * -- GETTER --
+     *  This method returns the start/stop button that was created in the 
+     *  method.
+     *  This button can be used to start or stop the game.
+     *
+     * @return the start/stop button
+
      */
+    @Getter
     private static JButton startStopButton;
     /**
      * Represents the play/pause button of the application.
      * This button toggles between play and pause functionality.
      * The button is static because there should be only one instance of the button.
+     * -- GETTER --
+     *  This method returns the play/pause button that is present on the menu panel of the game window. This button can be
+     *  used to start or pause the game.
+     *
+     * @return the play/pause button present on the menu panel of the game window.
+
      */
+    @Getter
     private static JButton playPauseButton;
     /**
      * A private static JComboBox that represents the player selection drop-down box.
      * The JComboBox contains a list of String values, where each item corresponds to a player.
      * The user can select a player from this drop-down list to perform certain operations.
+     * -- GETTER --
+     *  This method returns the player select drop down menu used in the game window. It allows the user to choose
+     *  which player they want to be represented as in the game.
+     *
+     * @return the player select JComboBox<String>
+
      */
+    @Getter
     private static JComboBox<String> playerSelect;
     /**
      * A private static JSpinner representing a color selection component.
+     * -- GETTER --
+     *  This method returns the color spinner used in the menu panel. It allows the user to select the number of colors
+     *  to be used in the game, and updates the color panel accordingly when the user changes the value. The minimum and
+     *  maximum values for the spinner are set to 4 and 9 respectively, with a step size of 1. A change listener is also
+     *  added to the spinner to update the color panel and prevent changes during game play.
+     *  <p>
+     *
+     * @return the color spinner used in the game window's menu panel.
+
      */
+    @Getter
     private static JSpinner colorSpinner;
     /**
      * This variable represents a Java Swing component that allows the user to select a value from a range of numeric values using up/down arrows or by typing directly into the component.
@@ -49,7 +82,13 @@ public class GameWindow {
      * This specific JSpinner is used to allow the user to select a value that represents a row in a table or grid.
      * <p>
      * Note: A SpinnerModel needs to be set to this JSpinner to specify the range of values and the behavior when the user interacts with the component.
+     * -- GETTER --
+     *  This method returns the JSpinner instance used for selecting the number of rows in the game board.
+     *
+     * @return the JSpinner instance used for selecting the number of rows in the game board
+
      */
+    @Getter
     private static JSpinner rowSpinner;
     /**
      * Private static JSpinner variable columnSpinner holds an instance of JSpinner,
@@ -61,7 +100,13 @@ public class GameWindow {
      * <p>
      * Note: This variable is only used internally and is not intended to be accessed
      * or modified externally.
+     * -- GETTER --
+     *  Returns the JSpinner object for selecting the number of columns in the game grid.
+     *
+     * @return the columnSpinner JSpinner object
+
      */
+    @Getter
     private static JSpinner columnSpinner;
     /**
      * Integer variable representing the previous column in a table or grid.
@@ -84,11 +129,25 @@ public class GameWindow {
     private static int rowPrev = 0;
     /**
      * A private static JComboBox that allows the user to choose a strategy.
+     * -- GETTER --
+     *  This method retrieves the strategy select dropdown menu used in the game window. The dropdown menu allows the user to select
+     *  which strategy to use in the game. It returns a JComboBox of String type that contains the list of available strategies.
+     *
+     * @return a JComboBox of String type containing the list of available strategies
+
      */
+    @Getter
     private static JComboBox<String> strategySelect;
     /**
      * JLabel used to display the timer value.
+     * -- GETTER --
+     *  This method returns the JLabel object for the timer in the game's menu panel. This label is used to display the
+     *  current time elapsed during the game.
+     *
+     * @return JLabel object for the game's timer.
+
      */
+    @Getter
     private static JLabel timerLabel;
 
     /**
@@ -96,6 +155,7 @@ public class GameWindow {
      * It is a private static JLabel object and can be accessed using its getter method.
      * It is used to display the points of player 1 on the GUI of the game.
      */
+    @Getter
     private static JLabel player1Points;
     /**
      * player2Points represents a graphical component of type JLabel that displays
@@ -103,7 +163,13 @@ public class GameWindow {
      * meaning it can be accessed from any instance of the class in which it is declared.
      * This JLabel can be updated to change the displayed value using the appropriate
      * class methods.
+     * -- GETTER --
+     *  This method returns the JLabel object containing the score of player 2 in the game.
+     *
+     * @return the JLabel object containing the score of player 2
+
      */
+    @Getter
     private static JLabel player2Points;
 
     /**
@@ -114,7 +180,13 @@ public class GameWindow {
      * As it is a static variable, it is shared among all instances of the class in which it is declared.
      * <p>
      * The variable is private to provide encapsulation of the game status and it is only accessible within the same class.
+     * -- GETTER --
+     *  This method returns the JLabel used to display the current game status.
+     *
+     * @return the game status JLabel
+
      */
+    @Getter
     private static JLabel gameStatus;
 
     /**
@@ -283,102 +355,6 @@ public class GameWindow {
 
 
     /**
-     * This method returns the start/stop button that was created in the {@link #createAndShowGUI()} method.
-     * This button can be used to start or stop the game.
-     *
-     * @return the start/stop button
-     */
-    public static JButton getStartStopButton() {
-        return startStopButton;
-    }
-
-    /**
-     * This method returns the play/pause button that is present on the menu panel of the game window. This button can be
-     * used to start or pause the game.
-     *
-     * @return the play/pause button present on the menu panel of the game window.
-     */
-    public static JButton getPlayPauseButton() {
-        return playPauseButton;
-    }
-
-
-    /**
-     * This method returns the player select drop down menu used in the game window. It allows the user to choose
-     * which player they want to be represented as in the game.
-     *
-     * @return the player select JComboBox<String>
-     */
-    public static JComboBox<String> getPlayerSelect() {
-        return playerSelect;
-    }
-
-    /**
-     * This method returns the color spinner used in the menu panel. It allows the user to select the number of colors
-     * to be used in the game, and updates the color panel accordingly when the user changes the value. The minimum and
-     * maximum values for the spinner are set to 4 and 9 respectively, with a step size of 1. A change listener is also
-     * added to the spinner to update the color panel and prevent changes during game play.
-     * <p>
-     *
-     * @return the color spinner used in the game window's menu panel.
-     */
-    public static JSpinner getColorSpinner() {
-        return colorSpinner;
-    }
-
-    /**
-     * This method returns the JSpinner instance used for selecting the number of rows in the game board.
-     *
-     * @return the JSpinner instance used for selecting the number of rows in the game board
-     */
-    public static JSpinner getRowSpinner() {
-        return rowSpinner;
-    }
-
-    /**
-     * Returns the JSpinner object for selecting the number of columns in the game grid.
-     *
-     * @return the columnSpinner JSpinner object
-     */
-    public static JSpinner getColumnSpinner() {
-        return columnSpinner;
-    }
-
-    /**
-     * This method retrieves the strategy select dropdown menu used in the game window. The dropdown menu allows the user to select
-     * which strategy to use in the game. It returns a JComboBox of String type that contains the list of available strategies.
-     *
-     * @return a JComboBox of String type containing the list of available strategies
-     */
-    public static JComboBox<String> getStrategySelect() {
-        return strategySelect;
-    }
-
-    /**
-     * This method returns the JLabel object for the timer in the game's menu panel. This label is used to display the
-     * current time elapsed during the game.
-     *
-     * @return JLabel object for the game's timer.
-     */
-    public static JLabel getTimerLabel() {
-        return timerLabel;
-    }
-
-
-    /**
-     * This method returns the JLabel used to display the current game status.
-     *
-     * @return the game status JLabel
-     */
-    public static JLabel getGameStatus() {
-        return gameStatus;
-    }
-
-    public static JLabel getPlayer1Points() {
-        return player1Points;
-    }
-
-    /**
      * This method sets the value of player1Points JLabel to the given JLabel parameter. This is used to update the points
      * displayed for player 1 during the game.
      *
@@ -386,15 +362,6 @@ public class GameWindow {
      */
     public static void setPlayer1Points(JLabel player1Points) {
         GameWindow.player1Points = player1Points;
-    }
-
-    /**
-     * This method returns the JLabel object containing the score of player 2 in the game.
-     *
-     * @return the JLabel object containing the score of player 2
-     */
-    public static JLabel getPlayer2Points() {
-        return player2Points;
     }
 
     /**

@@ -5,6 +5,7 @@
 package me.carinaschoppe.frontend;
 
 
+import lombok.Getter;
 import me.carinaschoppe.game.Game;
 import me.carinaschoppe.game.Player;
 import me.carinaschoppe.listeners.SelectColorAction;
@@ -18,18 +19,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
 public class DisplayPanel extends JPanel {
     /**
      * A 2D array of CellPanels representing a grid of panels in a graphical user interface.
      * Each CellPanel represents a single panel on the grid.
+     * -- GETTER --
+     *  Returns a 2D array of CellPanels representing the game board.
+     *  Each CellPanel represents a single cell on the board.
+     *
+     * @return a 2D array of CellPanels
+
      */
     private CellPanel[][] cellPanels;
     /**
      * This variable represents the number of rows in a given data structure.
+     * -- GETTER --
+     *  Returns the number of rows in the data set.
+     *
+     * @return the number of rows in the data set
+
      */
     private int rows;
     /**
      * The number of columns in a grid or table.
+     * -- GETTER --
+     *  Retrieves the number of columns in the data structure.
+     *
+     * @return the number of columns
+
      */
     private int columns;
 
@@ -241,26 +259,6 @@ public class DisplayPanel extends JPanel {
 
 
     /**
-     * Returns a 2D array of CellPanels representing the game board.
-     * Each CellPanel represents a single cell on the board.
-     *
-     * @return a 2D array of CellPanels
-     */
-    public CellPanel[][] getCellPanels() {
-        return cellPanels;
-    }
-
-
-    /**
-     * Returns the number of rows in the data set.
-     *
-     * @return the number of rows in the data set
-     */
-    public int getRows() {
-        return rows;
-    }
-
-    /**
      * Sets the number of rows of the cell panels in the grid layout and calls the method for
      * creating the cell panels.
      *
@@ -269,15 +267,6 @@ public class DisplayPanel extends JPanel {
     public void setRows(int rows) {
         this.rows = rows;
         cellPanelsCreation(columns, rows);
-    }
-
-    /**
-     * Retrieves the number of columns in the data structure.
-     *
-     * @return the number of columns
-     */
-    public int getColumns() {
-        return columns;
     }
 
     /**

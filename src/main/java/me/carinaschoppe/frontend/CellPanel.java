@@ -5,6 +5,7 @@
 package me.carinaschoppe.frontend;
 
 
+import lombok.Getter;
 import me.carinaschoppe.utility.Utility;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ import java.util.HashSet;
  * in the grid as well as its color, and can be used to determine adjacent cells.
  */
 
+@Getter
 public class CellPanel extends JPanel {
     /**
      * Represents the row of a matrix or table.
@@ -23,6 +25,11 @@ public class CellPanel extends JPanel {
      * The row is used to identify a specific row in a matrix or table.
      * It is represented as an integer value and is used in various
      * operations to manipulate the elements of the row.
+     * -- GETTER --
+     *  Returns the row number of the object.
+     *
+     * @return an int value representing the row number of the object.
+
      */
     private int row;
     /**
@@ -32,6 +39,11 @@ public class CellPanel extends JPanel {
     /**
      * Represents a color object.
      * The color variable stores the RGB color values for the color object.
+     * -- GETTER --
+     *  Retrieves the color of the instance.
+     *
+     * @return the color of the instance.
+
      */
     private Color color;
 
@@ -50,25 +62,12 @@ public class CellPanel extends JPanel {
     }
 
     /**
-     * Returns the row number of the object.
-     *
-     * @return an int value representing the row number of the object.
-     */
-    public int getRow() {
-        return row;
-    }
-
-    /**
      * Sets the value of the current row index.
      *
      * @param row the row index to be set.
      */
     public void setRow(int row) {
         this.row = row;
-    }
-
-    public int getColumn() {
-        return column;
     }
 
     /**
@@ -80,15 +79,6 @@ public class CellPanel extends JPanel {
         this.column = column;
     }
 
-
-    /**
-     * Retrieves the color of the instance.
-     *
-     * @return the color of the instance.
-     */
-    public Color getColor() {
-        return color;
-    }
 
     /**
      * Sets the color for this object

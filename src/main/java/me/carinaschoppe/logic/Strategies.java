@@ -4,6 +4,9 @@
 
 package me.carinaschoppe.logic;
 
+import lombok.Getter;
+
+@Getter
 public enum Strategies {
 
     STAGNATION("Stagnation"),
@@ -26,7 +29,4 @@ public enum Strategies {
         return null;
     }
 
-    public String getName() {
-        return name;
-    }
 }

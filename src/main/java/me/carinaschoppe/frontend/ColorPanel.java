@@ -5,6 +5,7 @@
 package me.carinaschoppe.frontend;
 
 
+import lombok.Getter;
 import me.carinaschoppe.game.Player;
 import me.carinaschoppe.utility.Utility;
 
@@ -12,14 +13,25 @@ import javax.swing.*;
 import java.awt.*;
 
 
+@Getter
 public class ColorPanel extends JPanel {
     /**
      * An array of JPanels representing various color options.
+     * -- GETTER --
+     *  Returns an array of JPanel objects, which represents color panels.
+     *
+     * @return an array of JPanel objects
+
      */
     private JPanel[] colorPanels;
     /**
      * An array of JLabel components used to represent colors.
      * Each label is used to display a different color.
+     * -- GETTER --
+     *  Returns an array of JLabel objects representing color labels.
+     *
+     * @return an array of JLabel objects representing color labels
+
      */
     private JLabel[] colorLabels;
     /**
@@ -27,6 +39,11 @@ public class ColorPanel extends JPanel {
      * <p>
      * This variable is only accessible within the context of its class and is used to keep track of
      * the number of colors present in some fashion.
+     * -- GETTER --
+     *  Returns the number of colors.
+     *
+     * @return the number of colors as an integer.
+
      */
     private int colorCount;
 
@@ -104,33 +121,6 @@ public class ColorPanel extends JPanel {
         revalidate();
         repaint();
         generateColorPanel();
-    }
-
-    /**
-     * Returns an array of JPanel objects, which represents color panels.
-     *
-     * @return an array of JPanel objects
-     */
-    public JPanel[] getColorPanels() {
-        return colorPanels;
-    }
-
-    /**
-     * Returns an array of JLabel objects representing color labels.
-     *
-     * @return an array of JLabel objects representing color labels
-     */
-    public JLabel[] getColorLabels() {
-        return colorLabels;
-    }
-
-    /**
-     * Returns the number of colors.
-     *
-     * @return the number of colors as an integer.
-     */
-    public int getColorCount() {
-        return colorCount;
     }
 
     /**

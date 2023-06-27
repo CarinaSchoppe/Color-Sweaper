@@ -4,6 +4,7 @@
 
 package me.carinaschoppe.utility;
 
+import lombok.Getter;
 import me.carinaschoppe.frontend.CellPanel;
 import me.carinaschoppe.frontend.GameWindow;
 import me.carinaschoppe.game.Game;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
 public class Component {
     /**
      * This is a private instance variable consisting of a List of CellPanel objects.
@@ -26,7 +28,12 @@ public class Component {
      * List<CellPanel> cells = new ArrayList<>();
      * cells.add(new CellPanel()); // Add a new cell to the list
      *
-     * @see CellPanel
+     *
+     * -- GETTER --
+     *  Returns a List of CellPanel objects that represent individual cells in a game board
+     *
+     @see CellPanel
+      * @return List<CellPanel> - a List of instances of the CellPanel class that represents individual cells on the game board
      */
     private final List<CellPanel> cells;
 
@@ -47,15 +54,6 @@ public class Component {
 
 
     //Checks whether all cells are connected directly or indirectly
-
-    /**
-     * Returns a List of CellPanel objects that represent individual cells in a game board
-     *
-     * @return List<CellPanel> - a List of instances of the CellPanel class that represents individual cells on the game board
-     */
-    public List<CellPanel> getCells() {
-        return cells;
-    }
 
     /**
      * Checks if the given CellPanel is adjacent to any of the components in this CellPanel.

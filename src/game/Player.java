@@ -41,7 +41,6 @@ public class Player implements MoveValidator {
 
     public void makeMove(int row, int column) {
         //player will click on a field.
-
         var panel = Utility.getDisplayPanel().getCellPanels()[column][row];
         //check valid move
         if (!validateMove(panel)) {
